@@ -9,7 +9,7 @@ on:
 permissions:
   contents: read     # for checkout
   pages: write       # for deploy
-  id-token: write    # for protected environments (if you use them)
+  id-token: write    # if you ever add OIDC
 
 jobs:
   build:
@@ -17,20 +17,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+        
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-
-      - name: Install dependencies (skip optional)
-        run: npm ci --omit=optional
-
+          
+      - name: Install dependencies
+        # CHANGED: Use 'npm install' instead of 'npm ci'
+        run: npm install 
+        
       - name: Build
         run: npm run build
-
+        
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1   # ← was @v3, now @v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
@@ -38,16 +39,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: production
-      url: https://immanuelsavio.github.io
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download Pages artifact
-        uses: actions/download-pages-artifact@v1  # ← add this!
-        with:
-          path: dist
-
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1            # ← was @v4, now @v1
-        with:
-          publish_dir: dist
+        uses: actions/deploy-pages@v4
