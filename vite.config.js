@@ -1,8 +1,8 @@
 // vite.config.js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/',      // ensure assets load from the root
+  base: '/',          // load everything from /
   plugins: [react()],
-});
+})
