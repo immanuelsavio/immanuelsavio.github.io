@@ -1,15 +1,20 @@
-name: 🛰️ Deploy to GitHub Pages
+# .github/workflows/deploy-pages.yml
+name: 🛰️ Build & Deploy to GitHub Pages
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
-  contents: read        # for checkout
-  pages: write          # to deploy to Pages
+  contents: read     # for checkout
+  pages: write       # for deploy
+  id-token: write    # if you ever add OIDC
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,8 +30,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      # → use the Pages‑specific upload action, NOT the generic upload-artifact
-      - name: Upload build for Pages
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: dist
@@ -34,12 +38,13 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     environment:
       name: production
       url: https://immanuelsavio.github.io
 
     steps:
-      - name: Download build artifact
+      - name: Download Pages artifact
         uses: actions/download-pages-artifact@v1
         with:
           path: dist
