@@ -1,5 +1,5 @@
 # .github/workflows/deploy-pages.yml
-name: 🛰️ Build & Deploy to GitHub Pages
+name: 🛰️ Build & Deploy to GitHub Pages
 
 on:
   push:
@@ -8,13 +8,12 @@ on:
 
 permissions:
   contents: read     # for checkout
-  pages: write       # to deploy to Pages
-  id-token: write    # required for protected environments
+  pages: write       # for deploy
+  id-token: write    # for protected environments (if you use them)
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,27 +30,24 @@ jobs:
         run: npm run build
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v1   # ← was @v3, now @v1
         with:
           path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
-    # ← change this to the name of your protected env if you used something else
     environment:
       name: production
-      url: ${{ steps.deployment.outputs.page_url }}
-
+      url: https://immanuelsavio.github.io
     steps:
       - name: Download Pages artifact
-        uses: actions/download-pages-artifact@v1
+        uses: actions/download-pages-artifact@v1  # ← add this!
         with:
           path: dist
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v1            # ← was @v4, now @v1
         with:
           publish_dir: dist
