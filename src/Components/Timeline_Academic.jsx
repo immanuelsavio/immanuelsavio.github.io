@@ -1,18 +1,19 @@
 // src/Components/Timeline_Academic.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGraduationCap } from 'react-icons/fa';
+import IndianaLogo from '../assets/Indiana.png';
+import ManipalLogo from '../assets/Manipal.png';
 
 const academic = [
   {
     title: 'Indiana University Bloomington',
-    icon: <FaGraduationCap className="text-cyan-500" />,
+    logo: IndianaLogo,
     period: 'Aug 2021 – Dec 2022',
     desc: 'M.S. in Data Science. Courses: AI, Computer Vision, Advanced Databases.',
   },
   {
     title: 'Manipal University',
-    icon: <FaGraduationCap className="text-purple-500" />,
+    logo: ManipalLogo,
     period: 'Aug 2016 – May 2020',
     desc: 'B.Tech in Computer Science. Courses: Deep Learning, Soft Computing, Databases.',
   },
@@ -41,10 +42,18 @@ const TimelineAcademic = () => (
           transition={{ duration: 0.6, delay: 0.2 * idx }}
           className="relative bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border-l-4 border-purple-600"
         >
-          <div className="absolute -left-8 top-6 bg-white dark:bg-gray-800 p-2 rounded-full shadow">
-            {item.icon}
+          {/* Optional dot + line */}
+          <span className="absolute -left-8 top-6 w-3 h-3 bg-purple-600 rounded-full"></span>
+
+          <div className="flex items-center space-x-4 mb-2">
+            <img
+              src={item.logo}
+              alt={`${item.title} logo`}
+              className="w-10 h-10 object-contain rounded"
+            />
+            <h3 className="text-2xl font-semibold">{item.title}</h3>
           </div>
-          <h3 className="text-2xl font-semibold">{item.title}</h3>
+
           <time className="text-sm text-gray-500 dark:text-gray-400">
             {item.period}
           </time>

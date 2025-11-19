@@ -41,7 +41,7 @@ function About() {
         className="text-4xl lg:text-6xl font-bold text-center"
       >
         <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
-          About Me
+          Who am I?
         </span>
       </motion.h2>
 
@@ -51,9 +51,9 @@ function About() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="max-w-3xl mx-auto mt-6 text-lg text-justify"
       >
-        I’m an Applied Machine Learning Scientist with 5+ years of experience building
-        production‑grade AI solutions. I love turning data into insights, optimizing ML
-        pipelines, and crafting delightful user experiences.
+        Hey there!
+        I’m Immanuel, a total data nerd who’s spent the last 8 years bringing AI ideas to life. I love turning messy numbers into “aha” moments, 
+        streamlining complex ML pipelines, and building interfaces that people actually enjoy using. Let’s make something awesome together!
       </motion.p>
 
       <motion.h3
