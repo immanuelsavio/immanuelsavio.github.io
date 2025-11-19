@@ -1,22 +1,25 @@
+import React from 'react';
 import Navbar from './Components/Navbar';
-import Home from './Components/Home';
-import About from './Components/About';
-import TimelineAcademic from './Components/Timeline_Academic';
-import TimelineProfessional from './Components/Timeline_Professional';
+import Hero from './Components/Hero';
+import Experience from './Components/Experience';
 import Projects from './Components/Projects';
-import Contact from './Components/Contact';
+import Skills from './Components/Skills';
+import EducationPublications from './Components/EducationPublications';
+import Footer from './Components/Footer';
 
 function App() {
   return (
-    <>
+    <div className="bg-primary min-h-screen text-text selection:bg-accent selection:text-primary">
       <Navbar />
-      <Home />
-      <About />
-      <TimelineAcademic />
-      <TimelineProfessional />
-      <Projects />
-      <Contact />
-    </>
+      <main>
+        <Hero />
+        <Experience />
+        <Projects />
+        <Skills />
+        <EducationPublications />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

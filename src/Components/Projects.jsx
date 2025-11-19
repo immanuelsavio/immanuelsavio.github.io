@@ -1,71 +1,113 @@
-// src/Components/Projects.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaGithub, FaExternalLinkAlt, FaFolder } from 'react-icons/fa';
+import resumeData from '../data/resume.json';
 
-const projects = [
-  {
-    title: 'NeuroCognitive AI',
-    desc: 'Modular agents for reasoning & creativity using LLMs + GANs.',
-    date: 'June 2025',
-    tags: ['React', 'TensorFlow', 'GAN', 'LLM'],
-    url: '#',
-  },
-  {
-    title: 'Sales Trigger System',
-    desc: 'Real‑time ML triggers for lead scoring & outreach.',
-    date: 'Dec 2024',
-    tags: ['Python', 'Snowflake', 'AWS Lambda'],
-    url: '#',
-  },
-];
-
-const Projects = () => (
-  <section
-    id="Projects"
-    className="bg-slate-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-6 lg:px-16 py-32"
-  >
-    <motion.h2
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="text-4xl lg:text-6xl font-bold text-center"
-    >
-      Projects
-    </motion.h2>
-
-    <div className="mt-12 grid gap-8 grid-cols-1 md:grid-cols-2">
-      {projects.map((p, i) => (
-        <motion.a
-          key={i}
-          href={p.url}
-          className="group relative bg-white dark:bg-gray-900 rounded-xl p-6 shadow hover:shadow-lg transition-transform transform hover:-translate-y-1"
-          initial={{ opacity: 0, y: 30 }}
+const Projects = () => {
+  return (
+    <section id="projects" className="py-20 bg-primary">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 * i }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent group-hover:text-white transition-colors">
-            {p.title}
-          </h3>
-          <p className="mt-3 text-sm text-gray-700 dark:text-gray-300">
-            {p.desc}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {p.tags.map(tag => (
-              <span
-                key={tag}
-                className="text-xs bg-slate-200 dark:bg-gray-700 px-2 py-1 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <time className="block mt-4 text-xs text-gray-500 dark:text-gray-400">
-            {p.date}
-          </time>
-        </motion.a>
-      ))}
-    </div>
-  </section>
-);
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-text mb-4">
+            <span className="text-accent">03.</span> Featured Projects
+          </h2>
+          <div className="w-20 h-1 bg-accent rounded-full"></div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {resumeData.projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-secondary/50 p-8 rounded-lg hover:-translate-y-2 transition-all duration-300 group"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <FaFolder className="text-4xl text-accent" />
+                <div className="flex space-x-4">
+                  {/* Add links if available in JSON, currently using placeholders or checking if they exist */}
+                  {/* Assuming project might have links in future, keeping structure ready */}
+                </div>
+              </div>
+
+              <h3 className="text-xl font-bold text-text mb-2 group-hover:text-accent transition-colors">
+                {project.title}
+              </h3>
+              
+              <p className="text-accent text-sm font-mono mb-4">{project.dates}</p>
+
+              <ul className="space-y-2 mb-6">
+                {project.highlights.map((highlight, i) => (
+                  <li key={i} className="text-text-muted text-sm leading-relaxed">
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech Stack Tags - Extracting from title/highlights if not explicitly in JSON */}
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {['LLMs', 'GANs', 'Python', 'FAISS'].map((tech, i) => (
+                  <span key={i} className="text-xs font-mono text-accent/80">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Patents as Projects */}
+          {resumeData.authorized_patents.map((patent, index) => (
+            <motion.div
+              key={`patent-${index}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: (resumeData.projects.length + index) * 0.1 }}
+              className="bg-secondary/50 p-8 rounded-lg hover:-translate-y-2 transition-all duration-300 group border border-accent/10"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <FaFolder className="text-4xl text-accent-dark" />
+                <div className="flex space-x-4">
+                  <a 
+                    href={patent.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-accent transition-colors"
+                  >
+                    <FaExternalLinkAlt size={20} />
+                  </a>
+                </div>
+              </div>
+
+              <h3 className="text-xl font-bold text-text mb-2 group-hover:text-accent transition-colors">
+                {patent.title}
+              </h3>
+              
+              <div className="flex justify-between items-center mb-4">
+                <p className="text-accent text-sm font-mono">{patent.status}</p>
+                <p className="text-text-muted text-xs">{patent.date}</p>
+              </div>
+
+              <p className="text-text-muted text-sm mb-2">
+                {patent.organization}
+              </p>
+              <p className="text-xs font-mono text-text-muted/60">
+                {patent.patent_number}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default Projects;
