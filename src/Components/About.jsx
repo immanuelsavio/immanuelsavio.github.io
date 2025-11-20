@@ -1,83 +1,85 @@
-// src/Components/About.jsx
-import React, { useState, useEffect } from 'react';
-import { motion }         from 'framer-motion';
-import Marquee            from 'react-fast-marquee';
-import { useMediaQuery }  from 'react-responsive';
+import React from 'react';
+import { motion } from 'framer-motion';
+import resumeData from '../data/resume.json';
+import profilePic from '../assets/About.jpeg';
 
-import airflowIcon        from '../assets/airflow.svg';
-
-function About() {
-  const isSmallScreen = useMediaQuery({ query: '(max-width: 640px)' });
-  const [speed, setSpeed] = useState(60);
-
-  useEffect(() => {
-    setSpeed(isSmallScreen ? 30 : 60);
-  }, [isSmallScreen]);
-
-  const techStack = [
-    { src: 'https://www.vectorlogo.zone/logos/python/python-icon.svg',         label: 'Python' },
-    { src: 'https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg',           label: 'SQL' },
-    { src: 'https://www.vectorlogo.zone/logos/pytorch/pytorch-icon.svg',       label: 'PyTorch' },
-    { src: 'https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg', label: 'TensorFlow' },
-    { src: 'http://bit.ly/4kNTcC0',label: 'HuggingFace' },
-    { src: 'https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg', label: 'GCP' },
-    { src: 'https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg',  label: 'AWS' },
-    { src: 'https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg',  label: 'Kubernetes' },
-    { src: 'https://www.vectorlogo.zone/logos/docker/docker-icon.svg',         label: 'Docker' },
-    { src: 'https://www.vectorlogo.zone/logos/snowflake/snowflake-icon.svg',   label: 'Snowflake' },
-    { src: airflowIcon,        label: 'Airflow' },
-    { src: 'https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg',       label: 'MongoDB' },
-  ];
-
+const About = () => {
   return (
-    <section
-      id="About"
-      className="bg-white dark:bg-black text-gray-900 dark:text-white px-6 lg:px-16 pt-20 pb-12"
-    >
-      <motion.h2
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="text-4xl lg:text-6xl font-bold text-center"
-      >
-        <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
-          Who am I?
-        </span>
-      </motion.h2>
+    <section id="about" className="py-32 bg-primary">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-text mb-6">
+            About Me
+          </h2>
+          <div className="w-24 h-1.5 bg-accent rounded-full"></div>
+        </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="max-w-3xl mx-auto mt-6 text-lg text-justify"
-      >
-        Hey there!
-        I’m Immanuel, a total data nerd who’s spent the last 8 years bringing AI ideas to life. I love turning messy numbers into “aha” moments, 
-        streamlining complex ML pipelines, and building interfaces that people actually enjoy using. Let’s make something awesome together!
-      </motion.p>
-
-      <motion.h3
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="mt-16 text-3xl lg:text-5xl font-bold text-center"
-      >
-        Tech Stack
-      </motion.h3>
-      <div className="mt-6">
-        <Marquee pauseOnHover speed={speed}>
-          {techStack.map((tech, idx) => (
-            <div key={idx} className="mx-8 flex flex-col items-center">
-              <div className="h-16 w-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center shadow">
-                <img src={tech.src} alt={tech.label} className="h-10 w-10" />
-              </div>
-              <p className="mt-2 text-xs sm:text-sm">{tech.label}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative"
+          >
+            <div className="relative z-10">
+              <img
+                src={profilePic}
+                alt={resumeData.name}
+                className="w-full h-auto rounded-2xl shadow-2xl border-4 border-accent/20"
+              />
             </div>
-          ))}
-        </Marquee>
+            {/* Decorative element */}
+            <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-accent/30 rounded-2xl -z-0"></div>
+          </motion.div>
+
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <p className="text-text-muted text-lg leading-relaxed">
+              Hey everyone, I'm Immanuel Savio—people call me Manny. I've been in the machine learning space for the last 8 years, starting all the way from Fourier transforms in MATLAB to all the LLMs we have today.
+            </p>
+            <p className="text-text-muted text-lg leading-relaxed">
+              I love making computers think and teaching them to predict the future. It's pretty wild seeing models actually work and do cool stuff in the real world.
+            </p>
+            <p className="text-text-muted text-lg leading-relaxed">
+              Hit me up if you want to collaborate on something cool or if you just want to talk tech and AI. Always down for a good conversation. Cheers!
+            </p>
+
+            <div className="pt-6">
+              <h3 className="text-2xl font-heading font-bold text-text mb-4">Quick Facts</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start text-text-muted">
+                  <span className="text-accent mr-3 mt-1">▹</span>
+                  <span>Based in Chicago, Illinois</span>
+                </li>
+                <li className="flex items-start text-text-muted">
+                  <span className="text-accent mr-3 mt-1">▹</span>
+                  <span>4+ years of professional experience and over 8+ years in AI</span>
+                </li>
+                <li className="flex items-start text-text-muted">
+                  <span className="text-accent mr-3 mt-1">▹</span>
+                  <span>Always learning, always building</span>
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};
 
 export default About;

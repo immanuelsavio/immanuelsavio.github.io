@@ -1,0 +1,183 @@
+{
+  "name": "Immanuel Savio Donbosco",
+  "contact": {
+    "phone": "812-225-4242",
+    "email": "immanuelsavio@gmail.com",
+    "linkedin": "https://linkedin.com/in/immanuelsavio",
+    "github": "https://github.com/immanuelsavio"
+  },
+  "profile_summary": {
+    "languages_frameworks": [
+      "Python", "C++", "SQL", "PyTorch", "TensorFlow",
+      "HuggingFace Transformers", "LangGraph", "LangChain"
+    ],
+    "platforms_tools": [
+      "AWS", "Kubernetes", "GCP", "Docker",
+      "GitHub Actions", "Snowflake", "MLflow",
+      "Airflow", "MongoDB"
+    ],
+    "specializations": [
+      "Generative AI", "Large Language Models", "RAG Systems",
+      "Responsible AI", "Model Compression", "Anomaly Detection",
+      "Time Series Forecasting", "Real-Time Inference",
+      "Model Evaluation & Monitoring"
+    ],
+    "core_competencies": [
+      "End-to-End ML Engineering", "Model Optimization & Quantization",
+      "Production ML Systems", "Cross-Functional Leadership",
+      "MLOps & Automation", "Applied Research", "Technical Mentorship"
+    ]
+  },
+  "experience": [
+    {
+      "company": "W.W. Grainger",
+      "logo": "/src/assets/grainger.png",
+      "roles": [
+        {
+          "title": "Sr. Applied Machine Learning Scientist | Recommendation Systems",
+          "location": "Chicago, Illinois",
+          "dates": "Aug 2025 – Present",
+          "highlights": [
+            "Architected and deployed production-scale agentic AI systems using LangGraph and RAG pipelines supporting 3,000+ employees with 95% retrieval accuracy.",
+            "Built enterprise upselling platform analyzing 10M+ SKU combinations using product association mining and LLM-based semantic verification."
+          ]
+        },
+        {
+          "title": "Applied Machine Learning Scientist | Recommendation Systems",
+          "dates": "Feb 2023 – Aug 2025",
+          "highlights": [
+            "Engineered ML pipelines for 5.9M+ chats and 140K+ calls with transformer-based summarization achieving <100ms latency.",
+            "Designed signal-based customer scoring for 2.9K+ enterprise accounts using Snowflake and Python."
+          ]
+        },
+        {
+          "title": "Applied Machine Learning Intern | Recommendation Systems",
+          "dates": "May 2022 – Aug 2022",
+          "highlights": [
+            "Developed Autoencoder-LSTM hybrid model for customer segment prediction analyzing 63M datapoints."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Dell Technologies",
+      "logo": "/src/assets/dell.png",
+      "roles": [
+        {
+          "title": "Software Engineer - Machine Learning | Dell Financial Services (DFS)",
+          "location": "Hyderabad, India",
+          "dates": "Jan 2020 – Jul 2021",
+          "highlights": [
+            "Designed production anomaly detection system for contract fraud reducing false positives by 40%.",
+            "Built real-time explainability infrastructure using SHAP with CI/CD and monitoring pipelines."
+          ]
+        }
+      ]
+    }
+  ],
+  "authorized_patents": [
+    {
+      "title": "Smart Intrusion Detection System",
+      "organization": "Dell Technologies",
+      "status": "Granted",
+      "date": "May 2025",
+      "patent_number": "US12301589B2",
+      "url": "https://patents.google.com/patent/US12301589B2/",
+      "link": "https://patents.google.com/patent/US12301589B2/"
+    },
+    {
+      "title": "System and Method for Handling Under-Performing Searches",
+      "organization": "W.W. Grainger, Inc.",
+      "status": "Filed",
+      "date": "May 2022",
+      "patent_number": "US20240095774A1",
+      "url": "https://patents.google.com/patent/US20240095774A1/",
+      "link": "https://patents.google.com/patent/US20240095774A1/"
+    }
+  ],
+  "projects": [
+    {
+      "title": "NeuroCognitive Modular AI System — Human Cognition Emulation using LLMs + GANs",
+      "dates": "Dec 2024 – Present",
+      "highlights": [
+        "Architected multi-agent system combining GANs + LLMs for creative reasoning and emotion modeling.",
+        "Designed modules for reasoning (LLaMA/Gemini), creativity (Stable Diffusion), and persistent memory via FAISS.",
+        "Implemented orchestration layer enabling contextual multi-turn interactions."
+      ],
+      "link": "#"
+    },
+    {
+      "title": "Flourish",
+      "dates": "2024",
+      "highlights": [
+        "Developed an AI-powered application to help users flourish in their personal and professional lives.",
+        "Integrated advanced LLMs for personalized coaching and feedback.",
+        "Built a responsive and interactive user interface using React and Tailwind CSS."
+      ],
+      "link": "https://github.com/immanuelsavio/Flourish"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Indiana University Bloomington",
+      "degree": "Master of Science, Data Science",
+      "dates": "Aug 2021 – Dec 2022",
+      "notes": ["Research Assistant — Computer Vision Lab", "Bloomington, Indiana"]
+    },
+    {
+      "institution": "Sikkim Manipal University",
+      "degree": "Bachelor of Technology, Computer Science",
+      "dates": "Aug 2016 – Apr 2020",
+      "notes": ["Vice President — Computer Science Council"]
+    }
+  ],
+  "publications": [
+    {
+      "title": "Genetic algorithm: An approach on optimization",
+      "authors": ["S.D. Immanuel", "U.K. Chakraborty"],
+      "year": 2019,
+      "venue": "International Conference on Communication and Electronics Systems",
+      "citations": 127,
+      "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
+    },
+    {
+      "title": "An IoT-Based Water Management System for Smart Cities",
+      "authors": ["I.S. Donbosco", "U.K. Chakraborty"],
+      "year": 2021,
+      "venue": "Water Security and Sustainability: Proceedings of Down To Earth 2019",
+      "pages": "247-259",
+      "citations": 8,
+      "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
+    },
+    {
+      "title": "Comparing performance of evolutionary algorithms — A travelling salesman perspective",
+      "authors": ["I.S. Donbosco", "U.K. Chakraborty"],
+      "year": 2021,
+      "venue": "11th International Conference on Cloud Computing, Data Science & Engineering",
+      "citations": 7,
+      "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
+    },
+    {
+      "title": "Cloud-based framework for disease detection and monitoring using deep learning",
+      "authors": ["I.S. Donbosco", "R. Gagan", "Sai", "I. Md. Ruhul"],
+      "year": 2019,
+      "venue": "8th International Conference on Computer, Communication and Sensor Technology (CCST)",
+      "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
+    },
+    {
+      "title": "Online Evaluation of Underground Mine Atmosphere and Scope of Application of WSN — A Case Study",
+      "authors": ["S. Jayanthu", "I.S. Donbosco", "P. Battu"],
+      "year": 2019,
+      "venue": "National Symposium on Integrated Development of Mines and Mineral Based Industries",
+      "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
+    }
+  ],
+  "external_links": {
+    "google_scholar": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en",
+    "patents": [
+      "https://patents.google.com/patent/US12301589B2/",
+      "https://patents.google.com/patent/US20240095774A1/"
+    ]
+  },
+  "original_resume_pdf": "/mnt/data/Immanuel_Savio_Resume_Sr.pdf"
+}
