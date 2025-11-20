@@ -7,8 +7,26 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: 250 250 249; /* Stone 50 - off-white/warm gray */
+    --color-secondary: 231 229 228; /* Stone 200 */
+    --color-accent: 2 132 199; /* Sky 600 */
+    --color-accent-dark: 3 105 161; /* Sky 700 */
+    --color-text: 15 23 42; /* Slate 900 - darker for better contrast */
+    --color-text-muted: 51 65 85; /* Slate 700 - darker for better readability */
+  }
+
+  .dark {
+    --color-primary: 15 23 42; /* Slate 900 */
+    --color-secondary: 30 41 59; /* Slate 800 */
+    --color-accent: 56 189 248; /* Sky 400 */
+    --color-accent-dark: 2 132 199; /* Sky 600 */
+    --color-text: 241 245 249; /* Slate 100 */
+    --color-text-muted: 148 163 184; /* Slate 400 */
+  }
+
   body {
-    @apply bg-primary text-text font-sans antialiased;
+    @apply bg-primary text-text font-sans antialiased transition-colors duration-300;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
@@ -31,16 +49,36 @@
   @apply bg-accent/30 text-accent;
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 body {
   font-family: 'Mulish', sans-serif;
-  background-color: #F8FAFC;
+  background-color: #FAFAF9;
   overflow-x: hidden;
 }
 
 .dark body {
   background-color: #0F172A;
+}
+
+/* Section snap points */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }

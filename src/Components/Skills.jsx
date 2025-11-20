@@ -20,10 +20,13 @@ const Skills = () => {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-text mb-4">
-            <span className="text-accent">04.</span> Skills & Expertise
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-text mb-6">
+            Technical Skills
           </h2>
-          <div className="w-20 h-1 bg-accent rounded-full"></div>
+          <div className="w-24 h-1.5 bg-accent rounded-full mb-8"></div>
+          <p className="text-text-muted text-lg max-w-2xl">
+            A comprehensive toolkit for building scalable AI and software solutions.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -34,17 +37,18 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-secondary/30 p-6 rounded-lg border border-secondary hover:border-accent/30 transition-colors"
+              className="bg-secondary/20 p-8 rounded-xl border border-secondary hover:border-accent/30 transition-all"
             >
-              <h3 className="text-xl font-bold text-accent mb-6">{category.title}</h3>
+              <h3 className="text-2xl font-bold text-text mb-6">{category.title}</h3>
               <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill, i) => (
-                  <span
+                  <motion.div
                     key={i}
-                    className="px-4 py-2 bg-primary rounded-md text-text-muted text-sm font-mono hover:text-accent hover:bg-secondary transition-all cursor-default"
+                    whileHover={{ scale: 1.05 }}
+                    className="px-4 py-2 bg-secondary/50 rounded-lg text-text-muted hover:text-accent hover:bg-accent/10 transition-all cursor-default"
                   >
                     {skill}
-                  </span>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

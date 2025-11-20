@@ -8,12 +8,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#0f172a", // Slate 900
-        secondary: "#1e293b", // Slate 800
-        accent: "#38bdf8", // Sky 400
-        "accent-dark": "#0284c7", // Sky 600
-        text: "#f1f5f9", // Slate 100
-        "text-muted": "#94a3b8", // Slate 400
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+        accent: "rgb(var(--color-accent) / <alpha-value>)",
+        "accent-dark": "rgb(var(--color-accent-dark) / <alpha-value>)",
+        text: "rgb(var(--color-text) / <alpha-value>)",
+        "text-muted": "rgb(var(--color-text-muted) / <alpha-value>)",
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
