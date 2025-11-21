@@ -1,0 +1,35 @@
+[
+  {
+    "id": "git-zero-to-hero",
+    "title": "Get Started with Git: Zero to Hero",
+    "description": "A comprehensive guide to mastering Git version control. Learn the essentials of branching, committing, and collaborating.",
+    "image": "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*s9I_qC0dJj-XgD8S2z7kLg.png",
+    "date": "2023-10-01",
+    "tags": ["Git", "Tutorial", "DevOps"],
+    "link": "https://medium.com/@immanuelsavio/get-started-with-git-zero-to-hero-83157fd54d08",
+    "type": "external",
+    "platform": "Medium"
+  },
+  {
+    "id": "ai-guardians",
+    "title": "AI Guardians: Safeguarding Public Spaces",
+    "description": "Exploring how AI can be used to detect and prevent obscene behavior in public spaces, ensuring safety for everyone.",
+    "image": "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*7qXqXqXqXqXqXqXqXqXqXq.png", 
+    "date": "2023-11-15",
+    "tags": ["AI", "Safety", "Computer Vision"],
+    "link": "https://medium.com/@immanuelsavio/ai-guardians-safeguarding-public-spaces-from-obscene-behavior-4df82a3c5316",
+    "type": "external",
+    "platform": "Medium"
+  },
+  {
+    "id": "what-is-toon",
+    "title": "What is TOON?",
+    "description": "Introducing TOON (Typed Object Object Notation) - a cleaner, more readable alternative to JSON for configuration and data.",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+    "date": "2025-11-20",
+    "tags": ["TOON", "Data Format", "Dev Tools"],
+    "link": "/blog/what-is-toon",
+    "type": "internal",
+    "content": "# What is TOON?\n\n**TOON** (Typed Object Object Notation) is a streamlined data serialization format designed to be the next evolution of structured data for the AI era. It strips away the noise of traditional formats to focus on what matters: the data itself.\n\n## What does it do?\n\nTOON provides a way to represent complex data structures—objects, arrays, and nested hierarchies—in a format that is both human-readable and machine-parsable. It serves as a bridge between raw data and the way humans naturally read lists and key-value pairs.\n\n## TOON vs. JSON\n\nJSON (JavaScript Object Notation) has been the king of data interchange for years. However, it was built for JavaScript parsers, not for human eyes or Large Language Models (LLMs).\n\n**JSON:**\n- Heavy use of syntax characters: `{}`, `[]`, `\"\"`, `,`\n- Strict formatting rules (trailing commas break it)\n- Hard to read when deeply nested\n\n**TOON:**\n- Minimal syntax: Uses indentation and newlines\n- No quotes around keys\n- No trailing commas or closing braces needed\n- Clean, Python-like readability\n\n## The LLM Token Economy\n\nJSON is currently considered the \"universal language\" for LLMs. Models are trained to output JSON because it's structured and predictable. However, this comes at a cost.\n\n**Token Efficiency:**\nLLMs operate on \"tokens\" (parts of words). Every character counts.\nIn JSON, a simple object like `{\"key\": \"value\"}` burns tokens on:\n1.  Opening brace `{`\n2.  Quote `\"`\n3.  Key `key`\n4.  Quote `\"`\n5.  Colon `:`\n6.  Space ` `\n7.  Quote `\"`\n8.  Value `value`\n9.  Quote `\"`\n10. Closing brace `}`\n\nThat's a lot of overhead for just `key: value`.\n\n**TOON saves you tokens.** By removing the structural clutter (braces, quotes, commas), TOON significantly reduces the token count for the same amount of information. For massive datasets or long context windows, this efficiency translates directly to:\n- **Lower Costs:** Fewer tokens processed = lower API bills.\n- **Faster Generation:** Less syntax to generate means faster responses.\n- **More Context:** You can fit more actual data into the model's context window.\n\nTOON isn't just a new format; it's an optimization for the age of Generative AI.\n\n### Ready to try it?\n\n[**🚀 Launch TOON Converter**](/playground/json-to-toon)"
+  }
+]

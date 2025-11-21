@@ -1,139 +1,261 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes, FaGithub, FaLinkedin, FaMoon, FaSun, FaEnvelope, FaGraduationCap } from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaBars, FaTimes, FaGithub, FaLinkedin, FaMoon, FaSun, FaEnvelope, FaGraduationCap, FaRocket } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
 import resumeData from '../data/resume.json';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar = ({ isOpen, setIsOpen }) => {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const sidebarRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Active section detection
+      const sections = navLinks.map(link => link.path.startsWith('/#') ? link.path.substring(2) : null).filter(Boolean);
+      let current = '';
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element && window.scrollY >= (element.offsetTop - 200)) {
+          current = section;
+        }
+      }
+      setActiveSection(current);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close sidebar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && 
+          sidebarRef.current && 
+          !sidebarRef.current.contains(event.target) && 
+          buttonRef.current && 
+          !buttonRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen, setIsOpen]);
+
+  // Lock body scroll only on mobile when menu is open
+  useEffect(() => {
+    if (isOpen && window.innerWidth < 768) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isOpen]);
+
   const navLinks = [
-    { name: 'Home', path: '#home' },
-    { name: 'About', path: '#about' },
-    { name: 'Experience', path: '#experience' },
-    { name: 'Skills', path: '#skills' },
-    { name: 'Education', path: '#education' },
-    { name: 'Publications', path: '#publications' },
-    { name: 'Talks', path: '#talks' },
-    { name: 'Contact', path: '#contact' },
+    { name: 'Home', path: '/#home' },
+    { name: 'About', path: '/#about' },
+    { name: 'Experience', path: '/#experience' },
+    { name: 'Skills', path: '/#skills' },
+    { name: 'Education', path: '/#education' },
+    { name: 'Publications', path: '/#publications' },
+    { name: 'Talks', path: '/#talks' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Contact', path: '/#contact' },
   ];
 
-  const scrollToSection = (id) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavigation = (path) => {
+    if (window.innerWidth < 768) {
       setIsOpen(false);
+    }
+    
+    if (path.startsWith('/#')) {
+      const id = path.substring(2);
+      setActiveSection(id); // Set active immediately on click
+      if (location.pathname === '/') {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    } else {
+      navigate(path);
+      window.scrollTo(0, 0);
     }
   };
 
   if (!mounted) return null;
 
-  return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-primary/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }} className="text-2xl font-heading font-bold text-accent tracking-tighter z-50 relative">
-          ISD<span className="text-text">.</span>
-        </a>
+  const sidebarVariants = {
+    closed: { x: "-100%", opacity: 0, transition: { type: "spring", stiffness: 300, damping: 30 } },
+    open: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 300, damping: 30 } }
+  };
 
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.path}
-              onClick={(e) => { e.preventDefault(); scrollToSection(link.path); }}
-              className="text-sm uppercase tracking-wider font-medium text-text-muted hover:text-accent transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
-            </a>
-          ))}
+  const linkVariants = {
+    closed: { opacity: 0, x: -20 },
+    open: (i) => ({ opacity: 1, x: 0, transition: { delay: i * 0.05 + 0.1 } })
+  };
+
+  return (
+    <>
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           
-          <div className="flex items-center space-x-4 ml-4 border-l border-secondary pl-4">
-            <a href={resumeData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
-              <FaLinkedin size={20} />
-            </a>
-            <a href={resumeData.contact.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
-              <FaGithub size={20} />
-            </a>
-            <a href={resumeData.external_links.google_scholar} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
-              <FaGraduationCap size={20} />
-            </a>
-            <a href={`mailto:${resumeData.contact.email}`} className="text-text-muted hover:text-accent transition-colors">
-              <FaEnvelope size={20} />
-            </a>
+          {/* Left Side: Menu Button & Logo */}
+          <div className="flex items-center gap-6 z-50">
+            {/* Menu Button */}
+            <button
+              ref={buttonRef}
+              className="text-text hover:text-accent transition-colors flex items-center gap-2 group"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle Menu"
+            >
+              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              <span className="hidden sm:block font-medium uppercase tracking-widest text-sm group-hover:text-accent">
+                Menu
+              </span>
+            </button>
+
+            <Link to="/" onClick={() => handleNavigation('/#home')} className="text-2xl font-heading font-bold text-accent tracking-tighter relative">
+              ISD<span className="text-text">.</span>
+            </Link>
+          </div>
+
+          {/* Right Side: Socials, Theme, Playground */}
+          <div className="flex items-center gap-4 sm:gap-6 z-50">
+            {/* Social Icons (Desktop) */}
+            <div className="hidden md:flex items-center gap-4 border-r border-secondary pr-6">
+              <a href={resumeData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
+                <FaLinkedin size={20} />
+              </a>
+              <a href={resumeData.contact.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
+                <FaGithub size={20} />
+              </a>
+              <a href={resumeData.external_links.google_scholar} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
+                <FaGraduationCap size={20} />
+              </a>
+              <a href={`mailto:${resumeData.contact.email}`} className="text-text-muted hover:text-accent transition-colors">
+                <FaEnvelope size={20} />
+              </a>
+            </div>
+
+            {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="text-text-muted hover:text-accent transition-colors p-2 rounded-full hover:bg-secondary/50"
+              className="text-text hover:text-accent transition-colors"
+              aria-label="Toggle Theme"
             >
               {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
             </button>
+
+            {/* Playground CTA */}
+            <Link 
+              to="/playground" 
+              className="flex items-center gap-2 px-4 py-2 bg-accent/10 hover:bg-accent text-accent hover:text-primary border border-accent rounded-full transition-all font-bold text-sm"
+            >
+              <FaRocket /> <span className="hidden sm:inline">Playground</span>
+            </Link>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-4 lg:hidden">
-          <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="text-text hover:text-accent transition-colors z-50 relative"
-          >
-            {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
-          </button>
-          <button
-            className="text-text hover:text-accent transition-colors z-50 relative"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay */}
+      {/* Floating Sidebar Menu (macOS Style) */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 bg-primary z-40 flex flex-col justify-center items-center lg:hidden"
-          >
-            <div className="flex flex-col space-y-6 text-center">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.path}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(link.path); }}
-                  className="text-2xl font-heading font-bold text-text-muted hover:text-accent"
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="flex justify-center space-x-8 pt-8 border-t border-secondary w-48 mx-auto">
-                <a href={resumeData.contact.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent">
-                  <FaGithub size={28} />
-                </a>
-                <a href={resumeData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent">
-                  <FaLinkedin size={28} />
-                </a>
+          <>
+            {/* Backdrop (Mobile Only) */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+            />
+            
+            {/* Sidebar */}
+            <motion.div
+              ref={sidebarRef}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={sidebarVariants}
+              className="fixed top-24 left-4 w-72 bg-secondary/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[calc(100vh-8rem)]"
+            >
+              <div className="p-4 overflow-y-auto">
+                <div className="flex flex-col space-y-1">
+                  <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 px-4 mt-2">Navigation</h3>
+                  {navLinks.map((link, i) => {
+                    const isHomePage = location.pathname === '/';
+                    const isHomeLink = link.path === '/#home';
+                    
+                    let isActive = false;
+
+                    if (isHomePage) {
+                      // On home page, use scroll spy
+                      if (link.path.startsWith('/#')) {
+                        const sectionId = link.path.substring(2);
+                        isActive = activeSection === sectionId || (isHomeLink && activeSection === '');
+                      }
+                    } else {
+                      // On other pages, match exact path
+                      isActive = location.pathname === link.path;
+                    }
+
+                    return (
+                      <motion.button
+                        key={link.name}
+                        custom={i}
+                        variants={linkVariants}
+                        onClick={() => handleNavigation(link.path)}
+                        className={`w-full py-2 rounded-lg text-lg font-bold transition-all flex items-center justify-center gap-3 ${
+                          isActive 
+                            ? 'border border-accent text-accent shadow-[0_0_8px_rgb(var(--color-accent)/0.4)] bg-accent/5' 
+                            : 'text-text hover:bg-white/10 hover:text-accent text-left px-4'
+                        }`}
+                      >
+                        {link.name}
+                      </motion.button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </motion.div>
+
+              {/* Mobile Socials (Bottom of sidebar) */}
+              <div className="p-4 border-t border-white/5 bg-black/20 md:hidden">
+                <div className="flex justify-around">
+                  <a href={resumeData.contact.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
+                    <FaGithub size={20} />
+                  </a>
+                  <a href={resumeData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">
+                    <FaLinkedin size={20} />
+                  </a>
+                  <a href={`mailto:${resumeData.contact.email}`} className="text-text-muted hover:text-accent transition-colors">
+                    <FaEnvelope size={20} />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 
