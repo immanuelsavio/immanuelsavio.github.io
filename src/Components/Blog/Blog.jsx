@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaMedium, FaExternalLinkAlt, FaArrowRight, FaCalendarAlt, FaTag } from 'react-icons/fa';
 import blogData from '../../data/blog.json';
 import gitImage from '../../assets/git.webp';
 import aiGuardiansImage from '../../assets/ai_guardians.webp';
 
 const Blog = () => {
+  const navigate = useNavigate();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -61,7 +62,7 @@ const Blog = () => {
             key={post.id}
             variants={cardVariants}
             className="group relative bg-secondary/30 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 flex flex-col h-full cursor-pointer"
-            onClick={() => post.type === 'external' ? window.open(post.link, '_blank') : window.location.href = post.link}
+            onClick={() => post.type === 'external' ? window.open(post.link, '_blank') : navigate(post.link)}
           >
             {/* Image */}
             <div className="h-48 overflow-hidden relative">
