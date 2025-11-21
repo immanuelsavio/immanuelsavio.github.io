@@ -35,7 +35,7 @@ jobs:
 
       - name: Debug Build Output
         run: |
-          ls -la dist
+          ls -R dist
           cat dist/index.html
 
       - name: Upload artifact
