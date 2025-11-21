@@ -11,13 +11,13 @@ const Talks = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-text mb-6">
             Professional Talks
           </h2>
-          <div className="w-24 h-1.5 bg-accent rounded-full mb-8"></div>
-          <p className="text-text-muted text-lg max-w-2xl">
+          <div className="w-24 h-1.5 bg-accent rounded-full mb-8 mx-auto"></div>
+          <p className="text-text-muted text-lg max-w-2xl mx-auto">
             Sharing knowledge and insights at conferences and events.
           </p>
         </motion.div>

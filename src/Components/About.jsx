@@ -49,7 +49,7 @@ const About = () => {
             className="space-y-6"
           >
             <p className="text-text-muted text-lg leading-relaxed">
-              Hey everyone, I'm Immanuel Savio—people call me Manny. I've been in the machine learning space for the last 8 years, starting all the way from Fourier transforms in MATLAB to all the LLMs we have today.
+              Hey everyone, I'm Immanuel Savio, people call me Manny. I've been in the machine learning space for the last 8 years, starting all the way from Fourier transforms in MATLAB to all the LLMs we have today.
             </p>
             <p className="text-text-muted text-lg leading-relaxed">
               I love making computers think and teaching them to predict the future. It's pretty wild seeing models actually work and do cool stuff in the real world.

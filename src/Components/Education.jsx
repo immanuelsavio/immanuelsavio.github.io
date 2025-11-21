@@ -1,73 +1,111 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGraduationCap, FaUniversity } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import resumeData from '../data/resume.json';
-import indianaLogo from '../assets/Indiana.png';
-import manipalLogo from '../assets/Manipal.png';
+import manipalLogo from '../assets/manipal.png';
+import indianaLogo from '../assets/indiana.png';
+
+const EducationCard = ({ education }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Determine which logo to use
+  const logo = education.institution === 'Indiana University Bloomington' ? indianaLogo : manipalLogo;
+
+  return (
+    <motion.div
+      layout
+      onClick={() => setIsExpanded(!isExpanded)}
+      className={`bg-secondary/30 rounded-xl border border-white/5 overflow-hidden cursor-pointer transition-colors hover:bg-secondary/50 ${isExpanded ? 'ring-1 ring-accent/50' : ''}`}
+    >
+      <div className="p-6">
+        <div className="flex justify-between items-start gap-4">
+          <div className="flex-grow">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white p-1.5 flex-shrink-0">
+                <img src={logo} alt={education.institution} className="w-full h-full object-contain" />
+              </div>
+              <h3 className="text-xl font-bold text-text">{education.degree}</h3>
+            </div>
+            
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-muted mb-3">
+              <span className="font-medium text-text">{education.institution}</span>
+              <span>•</span>
+              <span>{education.dates}</span>
+            </div>
+
+            {/* Tags - Always visible */}
+            <div className="flex flex-wrap gap-2 mt-2">
+              {education.tags && education.tags.map((tag, i) => (
+                <span key={i} className="text-xs px-2 py-1 rounded-md bg-accent/10 text-accent border border-accent/20">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-1 text-accent">
+            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+          </div>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-6 pt-0 border-t border-white/5 mt-2">
+              <ul className="space-y-2 mt-4">
+                {education.notes && education.notes.map((note, i) => (
+                  <li key={i} className="flex items-start gap-2 text-text-muted text-sm">
+                    <span className="text-accent mt-0.5 text-[0.6rem] flex-shrink-0">●</span>
+                    <span>{note}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 const Education = () => {
   return (
-    <section className="py-20 bg-primary min-h-screen pt-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="education" className="py-20 relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="space-y-12"
         >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-text mb-6">
-            Education
-          </h2>
-          <div className="w-24 h-1.5 bg-accent rounded-full mb-8"></div>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
+              Education
+            </h2>
+            <div className="h-1 w-20 bg-accent mx-auto rounded-full" />
+          </div>
+
+          <div className="space-y-6">
+            {resumeData.education.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <EducationCard education={edu} />
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
-
-        <div className="max-w-4xl">
-          {resumeData.education.map((edu, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="relative pl-8 md:pl-12 py-8 border-l-2 border-secondary last:border-0"
-            >
-              <div className="absolute -left-[11px] top-8 w-6 h-6 rounded-full bg-primary border-4 border-accent shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10" />
-              
-              <div className="bg-secondary/30 p-8 rounded-xl hover:bg-secondary/50 transition-colors duration-300">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                  <div className="flex items-center gap-3 mb-2 md:mb-0">
-                    <img 
-                      src={edu.institution.includes('Indiana') ? indianaLogo : manipalLogo} 
-                      alt={edu.institution}
-                      className="h-12 w-12 object-contain"
-                    />
-                    <h3 className="text-2xl font-bold text-text">{edu.institution}</h3>
-                  </div>
-                  <span className="text-accent font-mono text-sm bg-accent/10 px-3 py-1 rounded-full w-fit">
-                    {edu.dates}
-                  </span>
-                </div>
-                
-                <div className="flex items-center gap-2 mb-6">
-                  <FaGraduationCap className="text-text-muted" />
-                  <p className="text-xl text-text-muted font-medium">{edu.degree}</p>
-                </div>
-
-                {edu.notes && (
-                  <div className="bg-primary/50 p-4 rounded-lg border border-secondary">
-                    <ul className="space-y-2">
-                      {edu.notes.map((note, i) => (
-                        <li key={i} className="text-text-muted text-sm flex items-start">
-                          <span className="text-accent mr-2">•</span>
-                          {note}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );

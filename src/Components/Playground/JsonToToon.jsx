@@ -101,7 +101,7 @@ const JsonToToon = () => {
           <p className="text-text-muted">Convert standard JSON to the compact TOON format.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-350px)] min-h-[400px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-300px)] min-h-[400px]">
           {/* Input Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -114,7 +114,14 @@ const JsonToToon = () => {
               <textarea
                 value={inputJson}
                 onChange={(e) => setInputJson(e.target.value)}
-                placeholder="Paste your JSON here..."
+                placeholder={`{
+  "instructions": [
+    {"step": 1, "action": "Find some JSON", "status": "done"},
+    {"step": 2, "action": "Paste it here", "status": "waiting"},
+    {"step": 3, "action": "Click convert", "status": "pending"},
+    {"step": 4, "action": "Watch the magic", "status": "pending"}
+  ]
+}`}
                 className="w-full h-full bg-secondary/50 border border-white/10 rounded-xl p-4 text-text font-mono text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent resize-none"
               />
               <div className="absolute top-2 right-2 flex gap-2">
@@ -161,7 +168,11 @@ const JsonToToon = () => {
               <textarea
                 readOnly
                 value={outputToon}
-                placeholder="users[1]{id,name,role}:&#10;  1,Immanuel,ML Engineer"
+                placeholder={`instructions[4]{step,action,status}:
+  1,Find some JSON,done
+  2,Paste it here,waiting
+  3,Click convert,pending
+  4,Watch the magic,pending`}
                 className={`w-full h-full bg-secondary/30 border ${error ? 'border-red-500' : 'border-secondary'} rounded-xl p-4 text-text font-mono text-sm focus:outline-none transition-colors resize-none`}
               />
               <AnimatePresence>

@@ -65,9 +65,10 @@ const Navbar = ({ isOpen, setIsOpen }) => {
     { name: 'Home', path: '/#home' },
     { name: 'About', path: '/#about' },
     { name: 'Experience', path: '/#experience' },
-    { name: 'Skills', path: '/#skills' },
     { name: 'Education', path: '/#education' },
+    { name: 'Skills', path: '/#skills' },
     { name: 'Publications', path: '/#publications' },
+    { name: 'Patents', path: '/#patents' },
     { name: 'Talks', path: '/#talks' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/#contact' },
@@ -207,15 +208,17 @@ const Navbar = ({ isOpen, setIsOpen }) => {
                     
                     let isActive = false;
 
-                    if (isHomePage) {
-                      // On home page, use scroll spy
-                      if (link.path.startsWith('/#')) {
-                        const sectionId = link.path.substring(2);
-                        isActive = activeSection === sectionId || (isHomeLink && activeSection === '');
-                      }
+                    if (link.path === '/#home') {
+                      // Home link is ONLY active if we are strictly on the home page ('/')
+                      // AND (activeSection is 'home' OR activeSection is empty)
+                      isActive = location.pathname === '/' && (activeSection === 'home' || activeSection === '');
+                    } else if (link.path.startsWith('/#')) {
+                      // Other hash links are active if we are on home page AND activeSection matches
+                      const sectionId = link.path.substring(2);
+                      isActive = location.pathname === '/' && activeSection === sectionId;
                     } else {
-                      // On other pages, match exact path
-                      isActive = location.pathname === link.path;
+                      // Normal links (like /blog) are active if pathname matches or is a sub-route
+                      isActive = location.pathname === link.path || location.pathname.startsWith(link.path + '/');
                     }
 
                     return (

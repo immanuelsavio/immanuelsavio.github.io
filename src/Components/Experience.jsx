@@ -1,92 +1,146 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import resumeData from '../data/resume.json';
 import graingerLogo from '../assets/grainger.png';
 import dellLogo from '../assets/dell.png';
 
+const ExperienceCard = ({ role, companyLogo, companyName, isFirst, isLast, isSingle }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="relative pl-12 md:pl-24">
+      {/* Timeline Line */}
+      {!isLast && (
+        <div 
+          className={`absolute w-0.5 bg-accent/30 z-0 ${isSingle ? 'left-[19px]' : 'left-[23px]'} md:left-[47px]`}
+          style={{
+            top: '2.3rem',
+            height: 'calc(100% + 1.5rem)'
+          }}
+        />
+      )}
+      
+      {/* Timeline Dot */}
+      <div 
+        className={`absolute top-8 w-2.5 h-2.5 rounded-full border-2 border-accent bg-accent z-10
+        ${isSingle ? 'left-[15px] md:left-[39px]' : 'left-[19px] md:left-[43px]'}`}
+      />
+
+      <motion.div
+        layout
+        onClick={() => setIsExpanded(!isExpanded)}
+        className={`bg-secondary/30 rounded-xl border border-white/5 overflow-hidden cursor-pointer transition-colors hover:bg-secondary/50 ${isExpanded ? 'ring-1 ring-accent/50' : ''}`}
+      >
+        <div className="p-6">
+          <div className="flex justify-between items-start gap-4">
+            <div className="flex-grow">
+              <h3 className="text-xl font-bold text-text mb-1">{role.title}</h3>
+              
+              <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-muted mb-3">
+                <span className="font-medium text-accent">{companyName}</span>
+                <span>•</span>
+                <span>{role.location}</span>
+                <span>•</span>
+                <span>{role.dates}</span>
+              </div>
+
+              {/* Tags - Always visible */}
+              <div className="flex flex-wrap gap-2 mt-2">
+                {role.tags && role.tags.map((tag, i) => (
+                  <span key={i} className="text-xs px-2 py-1 rounded-md bg-accent/10 text-accent border border-accent/20">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-1 text-accent">
+              {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="px-6 pb-6 pt-0 border-t border-white/5 mt-2">
+              <ul className="space-y-2 mt-4">
+                {role.highlights && role.highlights.map((highlight, i) => (
+                  <li key={i} className="flex items-start gap-2 text-text-muted text-sm">
+                    <span className="text-accent mt-0.5 text-[0.6rem] flex-shrink-0">●</span>
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  );
+};
+
 const Experience = () => {
   return (
-    <section className="py-20 bg-primary min-h-screen pt-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-20 relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="space-y-12"
         >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-text mb-6">
-            Work Experience
-          </h2>
-          <div className="w-24 h-1.5 bg-accent rounded-full mb-8"></div>
-          <p className="text-text-muted text-lg max-w-2xl">
-            A journey through my professional career in Machine Learning and AI.
-          </p>
-        </motion.div>
-
-        <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-8 md:left-0 top-0 bottom-0 w-0.5 bg-secondary hidden md:block" />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
+              Experience
+            </h2>
+            <div className="h-1 w-20 bg-accent mx-auto rounded-full" />
+          </div>
 
           <div className="space-y-16">
-            {resumeData.experience.map((company, index) => (
-              <div key={index}>
-                {/* Company Header */}
-                <div className="mb-8 pl-0 md:pl-12 relative flex items-center gap-4">
-                   <div className="absolute left-[-6px] top-2 w-3 h-3 bg-accent rounded-full hidden md:block"></div>
-                   <img 
-                     src={company.company === 'W.W. Grainger' ? graingerLogo : dellLogo} 
-                     alt={company.company}
-                     className={`h-16 w-16 object-contain ${company.company === 'W.W. Grainger' ? 'bg-white p-2 rounded-lg' : ''}`}
-                   />
-                   <h3 className="text-2xl md:text-3xl font-bold text-text">{company.company}</h3>
+            {resumeData.experience.map((exp, index) => (
+              <div key={index} className="relative">
+                {/* Company Header with Logo */}
+                <div className="flex items-center gap-4 mb-8 pl-4 md:pl-8">
+                  <div className={`w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden shadow-lg ${exp.company === 'W.W. Grainger' ? 'bg-white p-2' : 'bg-secondary/50 p-1'}`}>
+                    <img 
+                      src={exp.company === 'W.W. Grainger' ? graingerLogo : dellLogo} 
+                      alt={exp.company} 
+                      className="w-full h-full object-contain" 
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold text-text">{exp.company}</h3>
                 </div>
 
-                {company.roles.map((role, roleIndex) => (
-                  <motion.div
-                    key={`${index}-${roleIndex}`}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-col md:flex-row gap-8 mb-12 md:pl-12 border-l-2 border-secondary md:border-l-0 ml-8 md:ml-0"
-                  >
-                    {/* Content Card */}
-                    <div className="flex-1">
-                      <div className="bg-secondary/30 p-8 rounded-xl hover:bg-secondary/50 transition-all duration-300 border border-secondary/50 hover:border-accent/30 shadow-lg hover:shadow-xl relative">
-                        {/* Connector Line for Mobile */}
-                        <div className="absolute left-[-34px] top-8 w-8 h-0.5 bg-secondary md:hidden"></div>
-                        
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
-                          <div>
-                            <h4 className="text-xl font-bold text-text leading-tight">{role.title}</h4>
-                            <div className="flex items-center gap-2 text-text-muted text-sm mt-2">
-                              <FaMapMarkerAlt className="text-accent" />
-                              <span>{role.location}</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 text-accent font-mono text-sm bg-accent/10 px-3 py-1 rounded-full w-fit h-fit">
-                            <FaCalendarAlt />
-                            <span>{role.dates}</span>
-                          </div>
-                        </div>
+                {/* Roles Container */}
+                <div className="space-y-6 relative">
+                  {/* Vertical Line connecting roles */}
+                  {/* Removed the separate vertical line div as it's now handled inside ExperienceCard */}
 
-                        <ul className="space-y-3">
-                          {role.highlights.map((highlight, i) => (
-                            <li key={i} className="flex items-start text-text-muted text-sm leading-relaxed">
-                              <span className="text-accent mr-3 mt-1.5 text-xs">●</span>
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+                  {exp.roles.map((role, roleIndex) => (
+                    <ExperienceCard 
+                      key={`${index}-${roleIndex}`} 
+                      role={role} 
+                      companyLogo={null} // Logo is now in header
+                      companyName={exp.company}
+                      isFirst={roleIndex === 0}
+                      isLast={roleIndex === exp.roles.length - 1}
+                      isSingle={exp.roles.length === 1}
+                    />
+                  ))}
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,98 +1,198 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Typewriter from 'typewriter-effect';
-import { FaArrowRight, FaFileDownload } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { SiGooglescholar } from 'react-icons/si';
 import resumeData from '../data/resume.json';
 import profilePic from '../assets/About.jpeg';
 
-const Hero = () => {
+const SplitFlapDisplay = ({ text }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [isAnimating, setIsAnimating] = useState(true);
+  
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ';
+  
+  useEffect(() => {
+    const targetText = text.toUpperCase();
+    let currentIteration = 0;
+    
+    const interval = setInterval(() => {
+      setDisplayText(
+        targetText
+          .split('')
+          .map((char, index) => {
+            if (index < currentIteration) {
+              return char;
+            }
+            return characters[Math.floor(Math.random() * characters.length)];
+          })
+          .join('')
+      );
+      
+      currentIteration += 0.5;
+      
+      if (currentIteration >= targetText.length) {
+        clearInterval(interval);
+        setDisplayText(targetText);
+        setIsAnimating(false);
+      }
+    }, 50);
+    
+    return () => clearInterval(interval);
+  }, [text]);
+  
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-accent-dark/10 rounded-full blur-[100px] animate-pulse" />
-      </div>
+    <div className="font-mono text-2xl md:text-3xl tracking-wider">
+      {displayText.split('').map((char, index) => (
+        <span
+          key={index}
+          className={`inline-block transition-all duration-100 ${
+            isAnimating ? 'text-accent/80' : 'text-accent'
+          }`}
+          style={{
+            textShadow: isAnimating 
+              ? '0 0 10px rgba(16, 185, 129, 0.5)' 
+              : '0 0 20px rgba(16, 185, 129, 0.3)',
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </div>
+  );
+};
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
-          
+const Hero = () => {
+  const [currentTechIndex, setCurrentTechIndex] = useState(0);
+  const technologies = [
+    'Machine Learning',
+    'Recommendation Systems',
+    'LLMs & Agentic AI',
+    'Deep Learning',
+    'NLP'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTechIndex((prev) => (prev + 1) % technologies.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="min-h-screen flex items-center justify-center bg-primary pt-20 pb-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Text Content */}
-          <div className="flex flex-col items-start max-w-2xl">
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-accent font-medium tracking-wider mb-4"
-            >
-              Hi, my name is
-            </motion.p>
-            
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-5xl md:text-7xl font-heading font-bold text-text mb-6 leading-tight"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex-1 text-center lg:text-left"
+          >
+            {/* Name */}
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-5xl md:text-7xl font-heading font-bold mb-6 bg-gradient-to-r from-accent via-blue-400 to-accent bg-clip-text text-transparent"
             >
               {resumeData.name}
             </motion.h1>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-2xl md:text-4xl font-heading font-bold text-text-muted mb-8 h-[60px] md:h-[80px]"
+            {/* Split-Flap Display */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mb-8 h-16 flex items-center justify-center lg:justify-start"
             >
-              <Typewriter
-                options={{
-                  strings: resumeData.profile_summary.specializations,
-                  autoStart: true,
-                  loop: true,
-                  deleteSpeed: 30,
-                  delay: 50,
-                }}
-              />
+              <SplitFlapDisplay key={currentTechIndex} text={technologies[currentTechIndex]} />
             </motion.div>
 
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="text-text-muted text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
+            {/* Bio */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto lg:mx-0 mb-12 leading-relaxed"
             >
-              I build production-scale AI solutions. Specializing in <span className="text-accent">Generative AI</span>, <span className="text-accent">LLMs</span>, and <span className="text-accent">Recommendation Systems</span>.
+              Senior Applied ML Scientist specializing in recommendation systems and agentic AI.
+              Building intelligent systems that scale to millions of users.
             </motion.p>
 
-            <motion.div 
+            {/* Social Links */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-wrap gap-4"
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="flex justify-center lg:justify-start gap-6"
             >
-              <a 
-                href="#projects" 
-                onClick={(e) => { e.preventDefault(); document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' }); }}
-                className="px-8 py-4 bg-accent text-primary font-bold rounded-lg hover:bg-accent-dark transition-all transform hover:-translate-y-1 shadow-lg shadow-accent/20 flex items-center gap-2"
-              >
-                View Projects <FaArrowRight />
-              </a>
-              <a 
-                href={resumeData.original_resume_pdf} 
-                target="_blank" 
+              <a
+                href={resumeData.contact.linkedin}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 border border-accent text-accent font-bold rounded-lg hover:bg-accent/10 transition-all flex items-center gap-2"
+                className="w-14 h-14 rounded-full bg-secondary/30 border border-secondary hover:border-accent flex items-center justify-center text-text hover:text-accent transition-all hover:scale-110"
               >
-                Resume <FaFileDownload />
+                <FaLinkedin size={24} />
+              </a>
+              <a
+                href={resumeData.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-14 h-14 rounded-full bg-secondary/30 border border-secondary hover:border-accent flex items-center justify-center text-text hover:text-accent transition-all hover:scale-110"
+              >
+                <FaGithub size={24} />
+              </a>
+              <a
+                href="https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-14 h-14 rounded-full bg-secondary/30 border border-secondary hover:border-accent flex items-center justify-center text-text hover:text-accent transition-all hover:scale-110"
+              >
+                <SiGooglescholar size={24} />
+              </a>
+              <a
+                href={`mailto:${resumeData.contact.email}`}
+                className="w-14 h-14 rounded-full bg-secondary/30 border border-secondary hover:border-accent flex items-center justify-center text-text hover:text-accent transition-all hover:scale-110"
+              >
+                <FaEnvelope size={24} />
               </a>
             </motion.div>
-          </div>
+
+            {/* What I'm Building Now Button */}
+            <motion.a
+              href="https://github.com/immanuelsavio/Flourish"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.0 }}
+              className="group relative inline-flex items-center justify-center lg:justify-start gap-3 px-8 py-4 mt-8 overflow-hidden rounded-2xl bg-gradient-to-r from-accent/20 via-accent/10 to-accent/20 border-2 border-accent/50 hover:border-accent transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
+            >
+              {/* Animated background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+              
+              {/* Content */}
+              <div className="relative flex items-center gap-3">
+                <span className="text-2xl animate-bounce">🚀</span>
+                <div className="flex flex-col items-start">
+                  <span className="text-sm text-accent/80 font-medium uppercase tracking-wider">What's New?</span>
+                  <span className="text-lg font-bold text-accent group-hover:text-accent/90 transition-colors">Check out my latest project →</span>
+                </div>
+              </div>
+              
+              {/* Pulse ring effect */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-accent/30 animate-ping opacity-20"></div>
+            </motion.a>
+          </motion.div>
 
           {/* Profile Picture */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="relative"
+            className="relative flex-shrink-0"
           >
             <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent shadow-[0_0_40px_rgba(56,189,248,0.3)] relative z-10">
               <img 
@@ -104,7 +204,6 @@ const Hero = () => {
             {/* Decorative Circle */}
             <div className="absolute top-4 left-4 w-full h-full rounded-full border-2 border-secondary -z-0 transform translate-x-4 translate-y-4"></div>
           </motion.div>
-
         </div>
       </div>
     </section>
@@ -112,3 +211,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
