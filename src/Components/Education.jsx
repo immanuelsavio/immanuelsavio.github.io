@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import resumeData from '../data/resume.json';
-import manipalLogo from '../assets/manipal.png';
-import indianaLogo from '../assets/indiana.png';
+import manipalLogo from '../assets/Manipal.png';
+import indianaLogo from '../assets/Indiana.png';
 
 const EducationCard = ({ education }) => {
   const [isExpanded, setIsExpanded] = useState(false);
