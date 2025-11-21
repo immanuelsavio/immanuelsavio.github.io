@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaExchangeAlt, FaCopy, FaCheck, FaExclamationTriangle, FaPaste, FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaExchangeAlt, FaCopy, FaCheck, FaExclamationTriangle, FaPaste, FaTrash, FaBookOpen } from 'react-icons/fa';
 
 const JsonToToon = () => {
   const [inputJson, setInputJson] = useState('');
@@ -95,10 +96,19 @@ const JsonToToon = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
         >
-          <h1 className="text-4xl font-heading font-bold text-text mb-2">JSON to TOON Converter</h1>
-          <p className="text-text-muted">Convert standard JSON to the compact TOON format.</p>
+          <div>
+            <h1 className="text-4xl font-heading font-bold text-text mb-2">JSON to TOON Converter</h1>
+            <p className="text-text-muted">Convert standard JSON to the compact TOON format.</p>
+          </div>
+          <Link 
+            to="/blog/what-is-toon"
+            className="flex items-center gap-2 px-4 py-2 bg-secondary/50 hover:bg-secondary border border-white/10 rounded-lg text-accent transition-all hover:scale-105"
+          >
+            <FaBookOpen />
+            <span>Read: What is TOON?</span>
+          </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-300px)] min-h-[400px]">
