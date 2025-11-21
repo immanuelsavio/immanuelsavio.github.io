@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes, FaGithub, FaLinkedin, FaMoon, FaSun, FaEnvelope, FaGraduationCap, FaRocket } from 'react-icons/fa';
+import { FaBars, FaTimes, FaGithub, FaLinkedin, FaMoon, FaSun, FaEnvelope, FaGraduationCap, FaRocket, FaPenNib } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
 import resumeData from '../data/resume.json';
 
@@ -70,7 +70,6 @@ const Navbar = ({ isOpen, setIsOpen }) => {
     { name: 'Publications', path: '/#publications' },
     { name: 'Patents', path: '/#patents' },
     { name: 'Talks', path: '/#talks' },
-    { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/#contact' },
   ];
 
@@ -165,6 +164,14 @@ const Navbar = ({ isOpen, setIsOpen }) => {
             >
               {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
             </button>
+
+            {/* Blog CTA */}
+            <Link 
+              to="/blog" 
+              className="flex items-center gap-2 px-4 py-2 bg-secondary/50 hover:bg-secondary text-text hover:text-accent border border-white/10 rounded-full transition-all font-bold text-sm"
+            >
+              <FaPenNib /> <span className="hidden sm:inline">Blog</span>
+            </Link>
 
             {/* Playground CTA */}
             <Link 

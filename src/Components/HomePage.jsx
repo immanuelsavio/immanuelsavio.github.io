@@ -19,6 +19,8 @@ const HomePage = () => {
       <div id="skills"><Skills /></div>
       <div id="publications">
         <Publications />
+      </div>
+      <div id="patents">
         <Patents />
       </div>
       <div id="talks"><Talks /></div>
