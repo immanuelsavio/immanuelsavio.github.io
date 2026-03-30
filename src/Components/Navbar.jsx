@@ -115,8 +115,8 @@ const Navbar = ({ isOpen, setIsOpen }) => {
 
   return (
     <>
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/90 backdrop-blur-md border-b border-white/5 py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           
           {/* Left Side: Menu Button & Logo */}
           <div className="flex items-center gap-6 z-50">
@@ -128,12 +128,12 @@ const Navbar = ({ isOpen, setIsOpen }) => {
               aria-label="Toggle Menu"
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-              <span className="hidden sm:block font-medium uppercase tracking-widest text-sm group-hover:text-accent">
+              <span className="hidden sm:block text-xs tracking-[0.2em] uppercase font-medium group-hover:text-accent">
                 Menu
               </span>
             </button>
 
-            <Link to="/" onClick={() => handleNavigation('/#home')} className="text-2xl font-heading font-bold text-accent tracking-tighter relative">
+            <Link to="/" onClick={() => handleNavigation('/#home')} className="text-xl font-heading font-extrabold text-accent tracking-tight relative">
               ISD<span className="text-text">.</span>
             </Link>
           </div>
@@ -166,19 +166,19 @@ const Navbar = ({ isOpen, setIsOpen }) => {
             </button>
 
             {/* Blog CTA */}
-            <Link 
-              to="/blog" 
-              className="flex items-center gap-2 px-4 py-2 bg-secondary/50 hover:bg-secondary text-text hover:text-accent border border-white/10 rounded-full transition-all font-bold text-sm"
+            <Link
+              to="/blog"
+              className="flex items-center gap-2 px-3 py-1.5 bg-secondary/50 hover:bg-secondary text-text hover:text-accent border border-white/10 rounded-md transition-all font-medium text-sm"
             >
-              <FaPenNib /> <span className="hidden sm:inline">Blog</span>
+              <FaPenNib size={14} /> <span className="hidden sm:inline">Blog</span>
             </Link>
 
             {/* Playground CTA */}
-            <Link 
-              to="/playground" 
-              className="flex items-center gap-2 px-4 py-2 bg-accent/10 hover:bg-accent text-accent hover:text-primary border border-accent rounded-full transition-all font-bold text-sm"
+            <Link
+              to="/playground"
+              className="flex items-center gap-2 px-3 py-1.5 bg-accent/10 hover:bg-accent text-accent hover:text-primary border border-accent/60 rounded-md transition-all font-medium text-sm"
             >
-              <FaRocket /> <span className="hidden sm:inline">Playground</span>
+              <FaRocket size={14} /> <span className="hidden sm:inline">Playground</span>
             </Link>
           </div>
         </div>
@@ -204,7 +204,7 @@ const Navbar = ({ isOpen, setIsOpen }) => {
               animate="open"
               exit="closed"
               variants={sidebarVariants}
-              className="fixed top-24 left-4 w-72 bg-secondary/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[calc(100vh-8rem)]"
+              className="fixed top-24 left-4 w-72 bg-secondary/80 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[calc(100vh-8rem)]"
             >
               <div className="p-4 overflow-y-auto">
                 <div className="flex flex-col space-y-1">
@@ -234,10 +234,10 @@ const Navbar = ({ isOpen, setIsOpen }) => {
                         custom={i}
                         variants={linkVariants}
                         onClick={() => handleNavigation(link.path)}
-                        className={`w-full py-2 rounded-lg text-lg font-bold transition-all flex items-center justify-center gap-3 ${
-                          isActive 
-                            ? 'border border-accent text-accent shadow-[0_0_8px_rgb(var(--color-accent)/0.4)] bg-accent/5' 
-                            : 'text-text hover:bg-white/10 hover:text-accent text-left px-4'
+                        className={`w-full py-2 rounded-md text-sm font-medium tracking-wide transition-all flex items-center justify-start gap-3 px-4 ${
+                          isActive
+                            ? 'border-l-2 border-accent text-accent bg-accent/5 pl-3'
+                            : 'text-text hover:bg-white/8 hover:text-accent'
                         }`}
                       >
                         {link.name}

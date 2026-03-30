@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBook, FaQuoteRight, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaBook, FaQuoteRight, FaExternalLinkAlt } from 'react-icons/fa';
 import resumeData from '../data/resume.json';
+import SectionHeading from './SectionHeading';
 
 const PublicationCard = ({ publication }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -10,19 +11,19 @@ const PublicationCard = ({ publication }) => {
     <motion.div
       layout
       onClick={() => setIsExpanded(!isExpanded)}
-      className={`bg-secondary/30 rounded-xl border border-white/5 overflow-hidden cursor-pointer transition-colors hover:bg-secondary/50 ${isExpanded ? 'ring-1 ring-accent/50' : ''}`}
+      className={`bg-secondary/20 rounded-lg border border-white/6 border-t-2 border-t-accent/25 overflow-hidden cursor-pointer transition-colors hover:bg-secondary/35 ${isExpanded ? 'ring-1 ring-accent/30' : ''}`}
     >
       <div className="p-6">
         <div className="flex justify-between items-start gap-4">
           <div className="flex-grow">
             <div className="flex items-start gap-3 mb-2">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/10 text-accent flex items-center justify-center mt-1">
-                <FaBook size={14} />
+              <div className="flex-shrink-0 w-8 h-8 rounded-md bg-accent/10 text-accent flex items-center justify-center mt-1">
+                <FaBook size={13} />
               </div>
               <div className="flex-grow">
-                <h3 className="text-xl font-bold text-text mb-2">{publication.title}</h3>
+                <h3 className="text-xl font-heading font-bold text-text mb-2">{publication.title}</h3>
                 <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-muted">
-                  <span className="text-accent font-mono">{publication.year}</span>
+                  <span className="text-accent font-mono tracking-wider">{publication.year}</span>
                   {publication.citations > 0 && (
                     <>
                       <span>•</span>
@@ -37,8 +38,8 @@ const PublicationCard = ({ publication }) => {
             </div>
           </div>
 
-          <div className="mt-1 text-accent flex-shrink-0">
-            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+          <div className="mt-1 text-accent font-mono text-sm flex-shrink-0 select-none">
+            {isExpanded ? '[−]' : '[+]'}
           </div>
         </div>
       </div>
@@ -63,9 +64,9 @@ const PublicationCard = ({ publication }) => {
                   <p className="text-text font-medium">{publication.venue}</p>
                 </div>
                 <div>
-                  <a 
-                    href={publication.link} 
-                    target="_blank" 
+                  <a
+                    href={publication.link}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-sm"
                     onClick={(e) => e.stopPropagation()}
@@ -87,33 +88,21 @@ const Publications = () => {
   return (
     <section id="publications" className="py-20 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="space-y-12"
-        >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
-              Publications
-            </h2>
-            <div className="h-1 w-20 bg-accent mx-auto rounded-full" />
-          </div>
+        <SectionHeading number="05" title="Publications" />
 
-          <div className="space-y-6">
-            {resumeData.publications.map((pub, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <PublicationCard publication={pub} />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <div className="space-y-6">
+          {resumeData.publications.map((pub, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <PublicationCard publication={pub} />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

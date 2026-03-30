@@ -1,58 +1,78 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import resumeData from '../data/resume.json';
+import SectionHeading from './SectionHeading';
+
+const categories = [
+  {
+    title: 'Languages & Frameworks',
+    key: 'languages_frameworks',
+    accent: 'text-blue-400',
+    pill: 'bg-blue-400/8 border border-blue-400/20 text-blue-300/80 hover:border-blue-400/50 hover:text-blue-200',
+  },
+  {
+    title: 'Platforms & Tools',
+    key: 'platforms_tools',
+    accent: 'text-violet-400',
+    pill: 'bg-violet-400/8 border border-violet-400/20 text-violet-300/80 hover:border-violet-400/50 hover:text-violet-200',
+  },
+  {
+    title: 'Specializations',
+    key: 'specializations',
+    accent: 'text-accent',
+    pill: 'bg-accent/8 border border-accent/20 text-accent/75 hover:border-accent/50 hover:text-accent',
+  },
+  {
+    title: 'Core Competencies',
+    key: 'core_competencies',
+    accent: 'text-amber-400',
+    pill: 'bg-amber-400/8 border border-amber-400/20 text-amber-300/80 hover:border-amber-400/50 hover:text-amber-200',
+  },
+];
 
 const Skills = () => {
-  const skillCategories = [
-    { title: 'Languages & Frameworks', skills: resumeData.profile_summary.languages_frameworks },
-    { title: 'Platforms & Tools', skills: resumeData.profile_summary.platforms_tools },
-    { title: 'Specializations', skills: resumeData.profile_summary.specializations },
-    { title: 'Core Competencies', skills: resumeData.profile_summary.core_competencies },
-  ];
-
   return (
-    <section id="skills" className="py-20 bg-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-text mb-6">
-            Technical Skills
-          </h2>
-          <div className="w-24 h-1.5 bg-accent rounded-full mb-8 mx-auto"></div>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">
-            A comprehensive toolkit for building scalable AI and software solutions.
-          </p>
-        </motion.div>
+    <section id="skills" className="py-24 bg-primary">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          number="04"
+          title="Technical Skills"
+          subtitle="A toolkit for building scalable AI and software systems."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {skillCategories.map((category, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-secondary/20 p-8 rounded-xl border border-secondary hover:border-accent/30 transition-all"
-            >
-              <h3 className="text-2xl font-bold text-text mb-6">{category.title}</h3>
-              <div className="flex flex-wrap gap-3">
-                {category.skills.map((skill, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-4 py-2 bg-secondary/50 rounded-lg text-text-muted hover:text-accent hover:bg-accent/10 transition-all cursor-default"
-                  >
-                    {skill}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {categories.map((category, index) => {
+            const skills = resumeData.profile_summary[category.key] ?? [];
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                className="bg-secondary/15 p-8 rounded-lg border border-white/6 border-t-2 border-t-accent/15 hover:border-t-accent/35 transition-all duration-300"
+              >
+                <h3 className={`text-xs font-mono uppercase tracking-[0.18em] ${category.accent} mb-5 opacity-80`}>
+                  {category.title}
+                </h3>
+                <div className="flex flex-wrap gap-2.5">
+                  {skills.map((skill, i) => (
+                    <span
+                      key={i}
+                      className={`
+                        inline-flex items-center px-3.5 py-1.5 rounded-full
+                        text-sm font-sans tracking-wide
+                        ${category.pill}
+                        transition-all duration-150 cursor-default
+                      `}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
