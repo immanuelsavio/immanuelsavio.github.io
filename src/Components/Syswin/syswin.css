@@ -552,6 +552,11 @@ img.sw-nav-logo {
   border-color: var(--n);
   color: #fff;
 }
+.sw-page.sw-dark .sw-vis-tag.active {
+  background: var(--b);
+  border-color: var(--b);
+  color: #fff;
+}
 .sw-vis-more {
   display: inline-flex;
   align-items: center;
