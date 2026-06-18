@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
-import { productCategories } from './productData';
+import { productCategories, getProductName } from './productData';
 import { useReveal, R, Img } from './syswinHelpers';
 
-const CATS = ['Physician', 'Ortho', 'Gynae', 'Derma', 'Dental', 'Ophtho'];
-const HERO_IMGS = [0, 2, 7, 10, 20, 30].map((i) => productCategories[0].images[i]);
+const TOTAL = productCategories.reduce((s, c) => s + c.images.length, 0);
 
 function Hero() {
   const [ref, vis] = useReveal();
+  const [activeCat, setActiveCat] = useState(productCategories[0]);
+  const preview = activeCat.images.slice(0, 6);
+
   return (
     <section className="sw-hero" ref={ref}>
       <div className={`sw-hero-inner${vis ? ' sw-hero-entered' : ''}`}>
@@ -25,17 +27,30 @@ function Hero() {
             <div className="sw-vis-label">Clinical Portfolio System</div>
             <div className="sw-vis-metrics">
               <div><span className="sw-vis-metric-num">6</span><span className="sw-vis-metric-label">Specialities</span></div>
-              <div><span className="sw-vis-metric-num">90+</span><span className="sw-vis-metric-label">Portfolio Items</span></div>
+              <div><span className="sw-vis-metric-num">100+</span><span className="sw-vis-metric-label">Portfolio Items</span></div>
               <div><span className="sw-vis-metric-num">50+</span><span className="sw-vis-metric-label">1mg References</span></div>
             </div>
             <div className="sw-vis-tags">
-              {CATS.map((c) => <span key={c} className="sw-vis-tag">{c}</span>)}
-            </div>
-            <div className="sw-vis-grid">
-              {HERO_IMGS.map((img, i) => (
-                <div key={i} className="sw-vis-item"><Img src={img} alt={`Product ${i + 1}`} /></div>
+              {productCategories.map((c) => (
+                <button
+                  key={c.slug}
+                  className={`sw-vis-tag${c.slug === activeCat.slug ? ' active' : ''}`}
+                  onClick={() => setActiveCat(c)}
+                >
+                  {c.name.replace(' Range', '')}
+                </button>
               ))}
             </div>
+            <div className="sw-vis-grid">
+              {preview.map((img, i) => (
+                <div key={`${activeCat.slug}-${i}`} className="sw-vis-item">
+                  <Img src={img} alt={getProductName(img)} />
+                </div>
+              ))}
+            </div>
+            <Link to={`/syswin/portfolio?cat=${activeCat.slug}`} className="sw-vis-more">
+              View all {activeCat.name} ({activeCat.images.length}) <FiArrowRight size={12} />
+            </Link>
           </div>
         </div>
       </div>

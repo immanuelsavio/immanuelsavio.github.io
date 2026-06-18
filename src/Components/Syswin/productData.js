@@ -45,7 +45,10 @@ export const productCategories = [
       "https://syswinpharma.com/img/Physician/Winril-1-2.png",
       "https://syswinpharma.com/img/Physician/Winril-M1Forte-M2Forte.png",
       "https://syswinpharma.com/img/Physician/Winril-M1-M2.png",
-      "https://syswinpharma.com/img/Physician/Winzoom.png"
+      "https://syswinpharma.com/img/Physician/Winzoom.png",
+      "https://syswinpharma.com/img/Physician/Antuff-CV%20625.png",
+      "https://syswinpharma.com/img/Physician/SFL-K%20(soap).png",
+      "https://syswinpharma.com/img/Physician/UV%20Win.png"
     ]
   },
   {
@@ -62,7 +65,9 @@ export const productCategories = [
       "https://syswinpharma.com/img/Ortho/Winmega...png",
       "https://syswinpharma.com/img/Ortho/Winmega.png",
       "https://syswinpharma.com/img/Ortho/Winmega-PG.png",
-      "https://syswinpharma.com/img/Ortho/Winzoom.png"
+      "https://syswinpharma.com/img/Ortho/Winzoom.png",
+      "https://syswinpharma.com/img/Ortho/Antuff-CV%20625.png",
+      "https://syswinpharma.com/img/Ortho/Antuff-CV%20DS.png"
     ]
   },
   {
@@ -79,7 +84,8 @@ export const productCategories = [
       "https://syswinpharma.com/img/Gyn/S-FL-150-200-400.png",
       "https://syswinpharma.com/img/Gyn/Sitra-100-200.png",
       "https://syswinpharma.com/img/Gyn/Winkleen.png",
-      "https://syswinpharma.com/img/Gyn/Winzoom.png"
+      "https://syswinpharma.com/img/Gyn/Winzoom.png",
+      "https://syswinpharma.com/img/Gyn/SFL-K%20(soap).png"
     ]
   },
   {
@@ -98,7 +104,13 @@ export const productCategories = [
       "https://syswinpharma.com/img/Derma/Winkleen.png",
       "https://syswinpharma.com/img/Derma/Winlu.png",
       "https://syswinpharma.com/img/Derma/Winmega.png",
-      "https://syswinpharma.com/img/Derma/Winmega-PG.png"
+      "https://syswinpharma.com/img/Derma/Winmega-PG.png",
+      "https://syswinpharma.com/img/Derma/Clos%20Plain%200.05.png",
+      "https://syswinpharma.com/img/Derma/Clos-S%206%25.png",
+      "https://syswinpharma.com/img/Derma/S-FL%20150-200.png",
+      "https://syswinpharma.com/img/Derma/S-FL%20400.png",
+      "https://syswinpharma.com/img/Derma/SFL-K%20(soap).png",
+      "https://syswinpharma.com/img/Derma/UV%20Win.png"
     ]
   },
   {
@@ -112,7 +124,9 @@ export const productCategories = [
       "https://syswinpharma.com/img/Dental/Raawin-20.png",
       "https://syswinpharma.com/img/Dental/Wincit-5-M-10.png",
       "https://syswinpharma.com/img/Dental/Windent.png",
-      "https://syswinpharma.com/img/Dental/Winmega-PG.png"
+      "https://syswinpharma.com/img/Dental/Winmega-PG.png",
+      "https://syswinpharma.com/img/Dental/Antuff-CV%20625.png",
+      "https://syswinpharma.com/img/Dental/Antuff-CV%20DS.png"
     ]
   },
   {
@@ -128,8 +142,121 @@ export const productCategories = [
 ];
 
 export function getProductName(imageUrl) {
-  const filename = imageUrl.split('/').pop().replace('.png', '');
-  return filename.replace(/\.\.\./g, '…');
+  const raw = decodeURIComponent(imageUrl.split('/').pop()).replace(/\.png$/i, '');
+  return raw.replace(/\.\.\./g, '…');
+}
+
+export const visualAidMap = {
+  "physician/Acpwin.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Acpwin.jpg",
+  "physician/Acpwin-SP.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Acpwin.jpg",
+  "physician/Antuff-CV 625.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Antuff-CV%20625.jpg",
+  "physician/Betonia.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Betonia.jpg",
+  "physician/Betonia-CZ.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Betonia%20CZ.jpg",
+  "physician/Bpcrush-10.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/BPCrush-10.jpg",
+  "physician/Cality.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Cality.jpg",
+  "physician/Fatrova-10.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Fatrova-10.jpg",
+  "physician/Fatrova-FT.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Fatrova-FT.jpg",
+  "physician/Folyred-XT.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Cality.jpg",
+  "physician/Newwin-TX.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Newwin-TX.jpg",
+  "physician/Panwin-40-D.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Panwin-40-D.jpg",
+  "physician/Pickter.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Pickter.jpg",
+  "physician/Raawin-20.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Raawin-20.jpg",
+  "physician/Raawin-D.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Raawin-D.jpg",
+  "physician/Raawin-Pro.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Raawin-Pro.jpg",
+  "physician/S-FL-150-200-400.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/S-FL%20150-200-400.jpg",
+  "physician/SFL-K (soap).png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Tebeste.jpg",
+  "physician/Sitra-100-200.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/S-FL%20150-200-400.jpg",
+  "physician/Sysvog-0.2-0.3.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Sysvog-GM1-GM-2.jpg",
+  "physician/Sysvog-Gm1-Gm2.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Sysvog-GM1-GM-2.jpg",
+  "physician/Tebest.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Tebeste.jpg",
+  "physician/Telwis-40-80.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Telwis%20Range.jpg",
+  "physician/Telwis-AM.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Telwis%20Range.jpg",
+  "physician/Telwis-AMH.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Telwis%20Range.jpg",
+  "physician/Telwis-Beta-25-50.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Telwis%20Range.jpg",
+  "physician/Telwis-CT.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Telwis%20Range.jpg",
+  "physician/Telwis-H-40-80.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Telwis%20Range.jpg",
+  "physician/Tenywin-20.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Tenywin-20.jpg",
+  "physician/Tenywin-M.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Tenywin-M.jpg",
+  "physician/UV Win.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winkleen.jpg",
+  "physician/Vahh.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Tebeste.jpg",
+  "physician/VG-WIN.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/VG%20Win-M-1000.jpg",
+  "physician/VG-WIN-DP.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/VG%20Win-DP.jpg",
+  "physician/VG-WIN-M-1000.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/VG%20Win-M-1000.jpg",
+  "physician/Wincit-5-10--M.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Wincit-5-10.jpg",
+  "physician/Wincit-D.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Wincit-5-10.jpg",
+  "physician/Winkleen.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winkleen.jpg",
+  "physician/Winlol-25-50.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winlol-25-50.jpg",
+  "physician/Winmega...png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winmega.jpg",
+  "physician/Winmega.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winmega.jpg",
+  "physician/Winmega-PG.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winmega.jpg",
+  "physician/Winril-1-2.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winril%20Range.jpg",
+  "physician/Winril-M1Forte-M2Forte.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winril%20Range.jpg",
+  "physician/Winril-M1-M2.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Winril%20Range.jpg",
+  "physician/Winzoom.png": "https://syswinpharma.com/img/Physician/Visual%20Aid/Acpwin.jpg",
+  "ortho/Acpwin.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Acpwin.jpg",
+  "ortho/Acpwin-SP.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Acpwin.jpg",
+  "ortho/Antuff-CV 625.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Antuff-CV%20625.jpg",
+  "ortho/Antuff-CV DS.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Antuff-CV%20625.jpg",
+  "ortho/Betonia.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Betonia.jpg",
+  "ortho/Cality.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Cality.jpg",
+  "ortho/Panwin-40-D.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Raawin-20-D.jpg",
+  "ortho/Pickter.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Pickter.jpg",
+  "ortho/Raawin-20-D.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Raawin-20-D.jpg",
+  "ortho/Winmega...png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/WinZoom.jpg",
+  "ortho/Winmega.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Winmega-PG.jpg",
+  "ortho/Winmega-PG.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/Winmega-PG.jpg",
+  "ortho/Winzoom.png": "https://syswinpharma.com/img/Ortho/Visual%20Aid/WinZoom.jpg",
+  "gynae/Acpwin-SP.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Acpwin-SP.jpg",
+  "gynae/Activfol.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Activfol.jpg",
+  "gynae/Betonia.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Betonia.jpg",
+  "gynae/Betonia-CZ.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Betonia.jpg",
+  "gynae/Cality.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Cality.jpg",
+  "gynae/Folyred-XT.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Folyred-XT.jpg",
+  "gynae/Newwin-TX.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Newwin-TX.jpg",
+  "gynae/S-FL-150-200-400.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/S-FL%20150-200-400.jpg",
+  "gynae/SFL-K (soap).png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/SFL-K.jpg",
+  "gynae/Sitra-100-200.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/S-FL%20150-200-400.jpg",
+  "gynae/Winkleen.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Win%20Zoom.jpg",
+  "gynae/Winzoom.png": "https://syswinpharma.com/img/Gyn/Visual%20Aid/Win%20Zoom.jpg",
+  "derma/Betonia.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Betonia.jpg",
+  "derma/Clos Plain 0.05.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Clos%20Plain%200.05.jpg",
+  "derma/Clos-S 6%.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Clos%20Plain%200.05.jpg",
+  "derma/Folyred-XT.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Folyred-XT.jpg",
+  "derma/Raawin-20-D.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Betonia.jpg",
+  "derma/Raawin-Pro.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Betonia.jpg",
+  "derma/S-FL 150-200.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/S-FL%20400.jpg",
+  "derma/S-FL 400.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/S-FL%20400.jpg",
+  "derma/SFL-K (soap).png": "https://syswinpharma.com/img/Derma/Visual%20Aid/SFL-K.jpg",
+  "derma/Sitra-100-200.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Sitra-100-200.jpg",
+  "derma/Tebeste.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Tebeste.jpg",
+  "derma/UV Win.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Winkleen.jpg",
+  "derma/Vahh.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Winlu.jpg",
+  "derma/Wincit-5-10.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Wincit-5-10.jpg",
+  "derma/Wincit-M.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Wincit-5-10.jpg",
+  "derma/Winkleen.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Winkleen.jpg",
+  "derma/Winlu.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Winlu.jpg",
+  "derma/Winmega.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Folyred-XT.jpg",
+  "derma/Winmega-PG.png": "https://syswinpharma.com/img/Derma/Visual%20Aid/Folyred-XT.jpg",
+  "dental/Acpwin.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Acpwin-SP.jpg",
+  "dental/Acpwin-SP.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Acpwin-SP.jpg",
+  "dental/Antuff-CV 625.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Panwin-D.jpg",
+  "dental/Antuff-CV DS.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Antuff-CV%20DS.jpg",
+  "dental/Newwin-TX.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Newwin_TX.jpg",
+  "dental/Panwin-D.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Panwin-D.jpg",
+  "dental/Raawin-20.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Antuff-CV%20DS.jpg",
+  "dental/Wincit-5-M-10.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Newwin_TX.jpg",
+  "dental/Windent.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Windent.jpg",
+  "dental/Winmega-PG.png": "https://syswinpharma.com/img/Dental/Visual%20Aid/Winmega-PG.jpg",
+  "ophtho/Betonia.png": "https://syswinpharma.com/img/Ophtho/Visual%20Aid/Betonia.jpg",
+  "ophtho/Betonia-CZ.png": "https://syswinpharma.com/img/Ophtho/Visual%20Aid/Betonia.jpg",
+  "ophtho/Wincit-5-10.png": "https://syswinpharma.com/img/Ophtho/Visual%20Aid/Wincit-5-10.jpg",
+  "ophtho/Wincit-M.png": "https://syswinpharma.com/img/Ophtho/Visual%20Aid/Wincit-5-10.jpg"
+};
+
+export function getVisualAidUrl(imageUrl, slug) {
+  const filename = imageUrl.split("/").pop();
+  const key = slug + "/" + decodeURIComponent(filename);
+  return visualAidMap[key] || null;
 }
 
 export const oneMgProductLinks = {
