@@ -1,6 +1,7 @@
+import { useOrderModal } from './VelsKitchen';
 import { Link } from 'react-router-dom';
 import { FiArrowRight, FiUsers } from 'react-icons/fi';
-import { ORDER_URLS, tastingMenus } from './menuData';
+import { tastingMenus } from './menuData';
 import { FadeIn, SectionLabel, GoldDivider } from './vkHelpers';
 
 const steps = [
@@ -10,6 +11,7 @@ const steps = [
 ];
 
 export default function Tasting() {
+  const openOrder = useOrderModal();
   return (
     <div className="overflow-hidden">
       {/* ── Header ──────────────────────────────── */}
@@ -91,14 +93,12 @@ export default function Tasting() {
 
                   {/* Order button */}
                   <div className="mt-auto pt-5">
-                    <a
-                      href={ORDER_URLS.direct}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={openOrder}
                       className="vk-btn-gold w-full py-3 text-sm inline-flex items-center justify-center gap-2"
                     >
                       Order This Box <FiArrowRight className="text-base" />
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>

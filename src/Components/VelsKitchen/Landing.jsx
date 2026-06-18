@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiTruck, FiClock, FiPackage } from 'react-icons/fi';
-import { ORDER_URLS, signatureItems, getImagePath } from './menuData';
+import { signatureItems, getImagePath } from './menuData';
+import { useOrderModal } from './VelsKitchen';
 import { FadeIn, SectionLabel, GoldDivider, FoodImage } from './vkHelpers';
 
 const stagger = {
@@ -27,6 +28,7 @@ const platforms = [
 ];
 
 export default function Landing() {
+  const openOrder = useOrderModal();
   return (
     <div className="overflow-hidden">
       {/* ── Hero ──────────────────────────────────── */}
@@ -62,14 +64,12 @@ export default function Landing() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-4 mt-8">
-            <a
-              href={ORDER_URLS.direct}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openOrder}
               className="vk-btn-gold py-3 px-6 text-sm inline-flex items-center gap-2"
             >
               Order Now <FiArrowRight className="text-base" />
-            </a>
+            </button>
             <Link
               to="/velskitchen/menu"
               className="vk-btn-outline py-3 px-6 text-sm inline-flex items-center gap-2"
@@ -183,14 +183,12 @@ export default function Landing() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <a
-              href={ORDER_URLS.direct}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openOrder}
               className="vk-btn-gold py-3 px-8 text-sm inline-flex items-center gap-2"
             >
               Order Now <FiArrowRight className="text-base" />
-            </a>
+            </button>
           </FadeIn>
 
           <FadeIn delay={0.2} className="mt-10">

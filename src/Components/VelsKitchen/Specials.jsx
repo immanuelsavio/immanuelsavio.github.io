@@ -1,6 +1,7 @@
+import { useOrderModal } from './VelsKitchen';
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
-import { ORDER_URLS, specialsConfig, getImagePath, getHiResPath, findMenuItem } from './menuData';
+import { specialsConfig, getImagePath, getHiResPath, findMenuItem } from './menuData';
 import { FadeIn, SectionLabel, GoldDivider, FoodImage, TagPill } from './vkHelpers';
 
 function resolve(names) {
@@ -12,6 +13,7 @@ const featuredItems = resolve(specialsConfig.featured);
 const newItems = resolve(specialsConfig.newItems);
 
 export default function Specials() {
+  const openOrder = useOrderModal();
   return (
     <div className="overflow-hidden">
       {/* ── Header ────────────────────────────────── */}
@@ -168,14 +170,12 @@ export default function Specials() {
               >
                 See the full menu <FiArrowRight className="text-base" />
               </Link>
-              <a
-                href={ORDER_URLS.direct}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={openOrder}
                 className="vk-btn-gold py-3 px-6 text-sm inline-flex items-center gap-2 min-h-[44px]"
               >
                 Order now <FiArrowRight className="text-base" />
-              </a>
+              </button>
             </div>
           </FadeIn>
         </div>

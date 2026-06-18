@@ -1,8 +1,84 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
 import { ORDER_URLS, NAV_LINKS } from './menuData';
+
+const OrderModalContext = createContext();
+export const useOrderModal = () => useContext(OrderModalContext);
+
+const platforms = [
+  { name: 'DoorDash', url: ORDER_URLS.doorDash, logo: '/velskitchen/images/doordash.png' },
+  { name: 'Uber Eats', url: ORDER_URLS.uberEats, logo: '/velskitchen/images/uber_eats.png' },
+  { name: 'Grubhub', url: ORDER_URLS.grubhub, logo: '/velskitchen/images/grubhub.jpeg' },
+];
+
+function OrderModal({ isOpen, onClose }) {
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          onClick={onClose}
+        >
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative bg-[var(--vk-surface)] border border-[var(--vk-border)] rounded-2xl p-6 sm:p-8 max-w-sm w-full"
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-[var(--vk-text-secondary)] hover:text-[var(--vk-text)] transition-colors"
+              aria-label="Close"
+            >
+              <FiX size={20} />
+            </button>
+            <h3 className="vk-serif font-bold text-xl text-[var(--vk-text)] mb-1 text-center">
+              Order Now
+            </h3>
+            <p className="text-[var(--vk-text-secondary)] text-sm text-center mb-6">
+              Pick your preferred platform
+            </p>
+            <div className="flex flex-col gap-3">
+              {platforms.map((p) => (
+                <a
+                  key={p.name}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-[var(--vk-border)] hover:border-[var(--vk-gold-dim)] bg-[var(--vk-surface-raised)] hover:bg-[var(--vk-border)] transition-all"
+                >
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    className="w-10 h-10 rounded-lg object-contain bg-white p-1"
+                  />
+                  <span className="font-semibold text-[var(--vk-text)] text-sm flex-1">
+                    {p.name}
+                  </span>
+                  <FiArrowRight className="text-[var(--vk-gold-dim)]" size={16} />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
 import Landing from './Landing';
 import MenuPage from './MenuPage';
 import Specials from './Specials';
@@ -54,9 +130,9 @@ function VKNav() {
               {l.label}
             </Link>
           ))}
-          <a href={ORDER_URLS.direct} target="_blank" rel="noopener noreferrer" className="vk-btn-gold text-sm px-5 py-2.5 inline-flex items-center gap-1.5">
+          <button onClick={useOrderModal()} className="vk-btn-gold text-sm px-5 py-2.5 inline-flex items-center gap-1.5">
             Order Now <FiArrowRight size={14} />
-          </a>
+          </button>
         </div>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-[var(--vk-text)] p-2 -mr-2" aria-label="Menu">
@@ -84,14 +160,9 @@ function VKNav() {
                   {l.label}
                 </Link>
               ))}
-              <a
-                href={ORDER_URLS.direct}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="vk-btn-gold text-center text-sm py-3 mt-2"
-              >
+              <button onClick={useOrderModal()} className="vk-btn-gold text-center text-sm py-3 mt-2 w-full">
                 Order Now
-              </a>
+              </button>
             </div>
           </motion.div>
         )}
@@ -174,14 +245,9 @@ function MobileCTA() {
           <Link to="/velskitchen/menu" className="text-[var(--vk-text-secondary)] text-sm font-medium flex-shrink-0">
             Menu
           </Link>
-          <a
-            href={ORDER_URLS.direct}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 vk-btn-gold text-center text-sm py-3"
-          >
+          <button onClick={useOrderModal()} className="flex-1 vk-btn-gold text-center text-sm py-3">
             Order Now
-          </a>
+          </button>
         </motion.div>
       )}
     </AnimatePresence>
@@ -190,6 +256,8 @@ function MobileCTA() {
 
 export default function VelsKitchen() {
   const location = useLocation();
+  const [orderOpen, setOrderOpen] = useState(false);
+  const openOrder = () => setOrderOpen(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -224,19 +292,22 @@ export default function VelsKitchen() {
   }, []);
 
   return (
-    <div className="vk-page">
-      <VKNav />
-      <main className="min-h-screen">
-        <Routes>
-          <Route path="/velskitchen" element={<Landing />} />
-          <Route path="/velskitchen/menu" element={<MenuPage />} />
-          <Route path="/velskitchen/specials" element={<Specials />} />
-          <Route path="/velskitchen/tasting" element={<Tasting />} />
-          <Route path="/velskitchen/about" element={<About />} />
-        </Routes>
-      </main>
-      <VKFooter />
-      <MobileCTA />
-    </div>
+    <OrderModalContext.Provider value={openOrder}>
+      <div className="vk-page">
+        <VKNav />
+        <main className="min-h-screen">
+          <Routes>
+            <Route path="/velskitchen" element={<Landing />} />
+            <Route path="/velskitchen/menu" element={<MenuPage />} />
+            <Route path="/velskitchen/specials" element={<Specials />} />
+            <Route path="/velskitchen/tasting" element={<Tasting />} />
+            <Route path="/velskitchen/about" element={<About />} />
+          </Routes>
+        </main>
+        <VKFooter />
+        <MobileCTA />
+        <OrderModal isOpen={orderOpen} onClose={() => setOrderOpen(false)} />
+      </div>
+    </OrderModalContext.Provider>
   );
 }

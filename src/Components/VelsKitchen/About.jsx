@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
-import { ORDER_URLS } from './menuData';
+import { useOrderModal } from './VelsKitchen';
 import { FadeIn, SectionLabel, GoldDivider } from './vkHelpers';
 
 const konguFacts = [
@@ -52,6 +52,7 @@ function VillagePattern() {
 }
 
 export default function About() {
+  const openOrder = useOrderModal();
   return (
     <div>
       {/* Header */}
@@ -241,14 +242,12 @@ export default function About() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href={ORDER_URLS.direct}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={openOrder}
                 className="vk-btn-gold px-8 py-3.5 text-sm inline-flex items-center justify-center gap-2"
               >
                 Order Now <FiArrowRight size={14} />
-              </a>
+              </button>
               <Link
                 to="/velskitchen/menu"
                 className="vk-btn-outline px-8 py-3.5 text-sm text-center"
