@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+.vk-page {
+  --vk-bg: #0B0A09;
+  --vk-surface: #151413;
+  --vk-surface-raised: #1C1B19;
+  --vk-border: #2A2826;
+  --vk-gold: #C5A55A;
+  --vk-gold-dim: #9A8347;
+  --vk-gold-glow: rgba(197, 165, 90, 0.12);
+  --vk-text: #F0EBE3;
+  --vk-text-secondary: #9A9389;
+  --vk-green: #5A9E6F;
+  --vk-red: #C45C4A;
+  --vk-amber: #D4962C;
+
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background-color: var(--vk-bg);
+  color: var(--vk-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vk-page *::selection {
+  background: rgba(197, 165, 90, 0.25);
+  color: var(--vk-text);
+}
+
+.vk-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.vk-page a { color: inherit; text-decoration: none; }
+
+/* ── Noise texture ──────────────────────────────── */
+.vk-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px;
+}
+
+/* ── Kolam dots ─────────────────────────────────── */
+.vk-kolam {
+  background-image: radial-gradient(circle, rgba(197, 165, 90, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Nav ────────────────────────────────────────── */
+.vk-nav-solid {
+  background: rgba(11, 10, 9, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--vk-border);
+}
+
+/* ── Scrollbar ──────────────────────────────────── */
+.vk-page::-webkit-scrollbar { width: 5px; }
+.vk-page::-webkit-scrollbar-track { background: var(--vk-bg); }
+.vk-page::-webkit-scrollbar-thumb { background: var(--vk-border); border-radius: 4px; }
+
+.vk-scrollbar-hide::-webkit-scrollbar { display: none; }
+.vk-scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Cards ──────────────────────────────────────── */
+.vk-card {
+  background: var(--vk-surface);
+  border: 1px solid var(--vk-border);
+  border-radius: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.vk-card:hover {
+  border-color: rgba(197, 165, 90, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.vk-card-flat {
+  background: var(--vk-surface);
+  border: 1px solid var(--vk-border);
+  border-radius: 12px;
+  transition: border-color 0.2s ease;
+}
+.vk-card-flat:hover {
+  border-color: rgba(197, 165, 90, 0.15);
+}
+
+/* ── Image frames ───────────────────────────────── */
+.vk-img-frame {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--vk-surface-raised);
+  border: 1px solid var(--vk-border);
+}
+.vk-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vk-img-round {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(197, 165, 90, 0.25);
+}
+
+/* ── Buttons ────────────────────────────────────── */
+.vk-btn-gold {
+  background: var(--vk-gold);
+  color: #0B0A09;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+.vk-btn-gold:hover {
+  background: #D4B66A;
+  box-shadow: 0 4px 20px rgba(197, 165, 90, 0.25);
+}
+
+.vk-btn-outline {
+  border: 1.5px solid var(--vk-border);
+  color: var(--vk-text);
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+.vk-btn-outline:hover {
+  border-color: var(--vk-gold-dim);
+  color: var(--vk-gold);
+}
+
+/* ── Dividers ───────────────────────────────────── */
+.vk-divider-gold {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(197, 165, 90, 0.25) 30%,
+    rgba(197, 165, 90, 0.4) 50%,
+    rgba(197, 165, 90, 0.25) 70%,
+    transparent 100%
+  );
+  height: 1px;
+}
+
+/* ── Hero banner ────────────────────────────────── */
+.vk-hero-strip {
+  position: relative;
+  overflow: hidden;
+}
+.vk-hero-strip::before,
+.vk-hero-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.vk-hero-strip::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--vk-bg), transparent);
+}
+.vk-hero-strip::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--vk-bg), transparent);
+}
+
+/* ── Animations ─────────────────────────────────── */
+@keyframes vk-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(197, 165, 90, 0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(197, 165, 90, 0); }
+}
+.vk-glow { animation: vk-glow 3s ease-in-out infinite; }
+
+@keyframes vk-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ── Tag pills ──────────────────────────────────── */
+.vk-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* ── Gold accent line ───────────────────────────── */
+.vk-gold-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--vk-gold);
+  border-radius: 1px;
+}
+
+/* ── Page transitions ───────────────────────────── */
+.vk-page-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}

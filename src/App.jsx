@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'next-themes';
 import { motion } from 'framer-motion';
 import Navbar from './Components/Navbar';
@@ -10,44 +10,61 @@ import Blog from './Components/Blog/Blog';
 import BlogPost from './Components/Blog/BlogPost';
 import Footer from './Components/Footer';
 import Background from './Components/Background';
+import VelsKitchen from './Components/VelsKitchen/VelsKitchen';
 
-function App() {
+function PortfolioLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <div className="bg-primary min-h-screen text-text selection:bg-accent selection:text-primary flex flex-col relative transition-colors duration-300">
         <Background />
-        <BrowserRouter>
-          <Navbar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-          <motion.main 
-            className="flex-grow"
-            initial={false}
-            animate={{ 
-              paddingLeft: isSidebarOpen && window.innerWidth >= 768 ? "20rem" : "0" 
-            }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          >
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/playground" element={<Playground />} />
-              <Route path="/playground/json-to-toon" element={<JsonToToon />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-            </Routes>
-          </motion.main>
-          <motion.div
-             initial={false}
-             animate={{ 
-               paddingLeft: isSidebarOpen && window.innerWidth >= 768 ? "20rem" : "0" 
-             }}
-             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          >
-            <Footer />
-          </motion.div>
-        </BrowserRouter>
+        <Navbar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+        <motion.main
+          className="flex-grow"
+          initial={false}
+          animate={{
+            paddingLeft: isSidebarOpen && window.innerWidth >= 768 ? "20rem" : "0"
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/playground" element={<Playground />} />
+            <Route path="/playground/json-to-toon" element={<JsonToToon />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+          </Routes>
+        </motion.main>
+        <motion.div
+           initial={false}
+           animate={{
+             paddingLeft: isSidebarOpen && window.innerWidth >= 768 ? "20rem" : "0"
+           }}
+           transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
+          <Footer />
+        </motion.div>
       </div>
     </ThemeProvider>
+  );
+}
+
+function AppRoutes() {
+  const location = useLocation();
+
+  if (location.pathname.startsWith('/velskitchen')) {
+    return <VelsKitchen />;
+  }
+
+  return <PortfolioLayout />;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
