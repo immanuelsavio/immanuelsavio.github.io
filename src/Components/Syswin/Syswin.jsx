@@ -77,7 +77,7 @@ function ThemePill() {
 
 export default function Syswin() {
   const location = useLocation();
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   useEffect(() => { window.scrollTo(0, 0); }, [location.pathname]);
 

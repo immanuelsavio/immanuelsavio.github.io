@@ -1408,6 +1408,27 @@ img.sw-nav-logo {
 .sw-page.sw-dark .sw-lb {
   background: rgba(0, 0, 0, 0.85);
 }
+.sw-page.sw-dark .sw-lb-full {
+  background: var(--card);
+  border-color: var(--bdr);
+}
+.sw-page.sw-dark .sw-lb-hero-img {
+  background: var(--surf);
+}
+.sw-page.sw-dark .sw-lb-bar {
+  border-top-color: var(--bdr);
+}
+.sw-page.sw-dark .sw-lb-action-btn {
+  background: var(--b);
+  color: #fff;
+}
+.sw-page.sw-dark .sw-lb-action-btn:hover {
+  background: #3b82f6;
+}
+.sw-page.sw-dark .sw-lb-box {
+  background: var(--card);
+  border-color: var(--bdr);
+}
 @keyframes sw-lb-in {
   from { opacity: 0; }
   to   { opacity: 1; }
