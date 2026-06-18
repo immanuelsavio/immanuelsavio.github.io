@@ -42,7 +42,7 @@ export default function SyswinPortfolio() {
 
   useEffect(() => setPage(1), [slug, q]);
 
-  const links = modal ? getOneMgLinks(modal.name) : [];
+  const oneMgLink = modal ? getOneMgLinks(modal.name)[0] || null : null;
   const visualAid = modal ? getVisualAidUrl(modal.image, modal.slug) : null;
 
   return (
@@ -140,11 +140,11 @@ export default function SyswinPortfolio() {
                     <FiMaximize2 size={14} /> View detail sheet
                   </a>
                 )}
-                {links.length > 0 && links.map((l) => (
-                  <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="sw-lb-action-link">
+                {oneMgLink && (
+                  <a href={oneMgLink.url} target="_blank" rel="noopener noreferrer" className="sw-lb-action-link">
                     View on 1mg <FiExternalLink size={12} />
                   </a>
-                ))}
+                )}
               </div>
             </div>
             <p className="sw-lb-note">For portfolio reference only. Please refer to approved prescribing information.</p>
