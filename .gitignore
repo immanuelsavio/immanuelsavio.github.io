@@ -61,3 +61,8 @@ Thumbs.db
 # Planning docs
 plans/
 docs/
+
+.claude/
+.agents/
+agent/
+skills-lock.json
