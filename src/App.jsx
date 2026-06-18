@@ -11,6 +11,7 @@ import BlogPost from './Components/Blog/BlogPost';
 import Footer from './Components/Footer';
 import Background from './Components/Background';
 import VelsKitchen from './Components/VelsKitchen/VelsKitchen';
+import Syswin from './Components/Syswin/Syswin';
 
 function PortfolioLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -55,6 +56,10 @@ function AppRoutes() {
 
   if (location.pathname.startsWith('/velskitchen')) {
     return <VelsKitchen />;
+  }
+
+  if (location.pathname.startsWith('/syswin')) {
+    return <Syswin />;
   }
 
   return <PortfolioLayout />;
