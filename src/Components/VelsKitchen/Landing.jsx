@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiTruck, FiClock, FiPackage } from 'react-icons/fi';
 import { ORDER_URLS, signatureItems, getImagePath } from './menuData';
-import { useOrderModal } from './VelsKitchen';
+import { useOrderModal } from './orderContext';
 import { FadeIn, SectionLabel, GoldDivider, FoodImage } from './vkHelpers';
 
 const stagger = {

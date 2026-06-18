@@ -1,4 +1,4 @@
-import { useOrderModal } from './VelsKitchen';
+import { useOrderModal } from './orderContext';
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
 import { specialsConfig, getImagePath, getHiResPath, findMenuItem } from './menuData';

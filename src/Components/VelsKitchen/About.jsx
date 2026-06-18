@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
-import { useOrderModal } from './VelsKitchen';
+import { useOrderModal } from './orderContext';
 import { FadeIn, SectionLabel, GoldDivider } from './vkHelpers';
 
 const konguFacts = [

@@ -1,11 +1,10 @@
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
 import { ORDER_URLS, NAV_LINKS } from './menuData';
 
-const OrderModalContext = createContext();
-export const useOrderModal = () => useContext(OrderModalContext);
+import { OrderModalContext, useOrderModal } from './orderContext';
 
 const platforms = [
   { name: 'DoorDash', url: ORDER_URLS.doorDash, logo: '/velskitchen/images/doordash.png' },
