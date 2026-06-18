@@ -1106,13 +1106,13 @@ img.sw-nav-logo {
 .sw-grid-lg { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .sw-card-img-lg {
   aspect-ratio: auto;
-  min-height: 220px;
-  max-height: 280px;
-  padding: 1.25rem;
+  min-height: 140px;
+  max-height: 190px;
+  padding: 0.75rem;
 }
 .sw-card-img-lg img {
   max-width: 95%;
-  max-height: 240px;
+  max-height: 170px;
 }
 
 /* Pagination */
