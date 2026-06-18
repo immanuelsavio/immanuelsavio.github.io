@@ -116,19 +116,19 @@ export default function Tasting() {
         </FadeIn>
 
         <FadeIn delay={0.08}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-4 mt-8">
             {steps.map((step, i) => (
-              <div key={step.num} className="flex items-center gap-3 sm:flex-col sm:gap-2">
-                <span className="vk-serif text-2xl font-bold text-[var(--vk-gold)]">
-                  {step.num}
-                </span>
-                <span className="text-[var(--vk-text)] text-sm sm:text-base">
-                  {step.label}
-                </span>
-                {i < steps.length - 1 && (
-                  <span className="hidden sm:inline text-[var(--vk-gold-dim)] text-lg ml-4 sm:ml-0 sm:mt-0">
-                    &rarr;
+              <div key={step.num} className="contents">
+                <div className="flex flex-col items-center gap-2">
+                  <span className="vk-serif text-2xl font-bold text-[var(--vk-gold)]">
+                    {step.num}
                   </span>
+                  <span className="text-[var(--vk-text)] text-sm sm:text-base text-center">
+                    {step.label}
+                  </span>
+                </div>
+                {i < steps.length - 1 && (
+                  <span className="hidden sm:block text-[var(--vk-gold-dim)] text-lg">→</span>
                 )}
               </div>
             ))}
