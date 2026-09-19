@@ -57,7 +57,7 @@
         {
           "title": "Sr. Applied Machine Learning Scientist | Recommendation Systems",
           "location": "Chicago, Illinois",
-          "dates": "Aug 2025 – Present",
+          "dates": "Aug 2025 - Present",
           "highlights": [
             "Architected and deployed production-scale agentic AI systems using LangGraph and RAG pipelines supporting 3,000+ employees with 95% retrieval accuracy.",
             "Built enterprise upselling platform analyzing 10M+ SKU combinations using product association mining and LLM-based semantic verification."
@@ -73,7 +73,7 @@
         {
           "title": "Applied Machine Learning Scientist | Recommendation Systems",
           "location": "Chicago, Illinois",
-          "dates": "Feb 2023 – Aug 2025",
+          "dates": "Feb 2023 - Aug 2025",
           "highlights": [
             "Engineered ML pipelines for 5.9M+ chats and 140K+ calls with transformer-based summarization achieving <100ms latency.",
             "Designed signal-based customer scoring for 2.9K+ enterprise accounts using Snowflake and Python."
@@ -88,7 +88,7 @@
         {
           "title": "Applied Machine Learning Intern | Recommendation Systems",
           "location": "Chicago, Illinois",
-          "dates": "May 2022 – Aug 2022",
+          "dates": "May 2022 - Aug 2022",
           "highlights": [
             "Developed Autoencoder-LSTM hybrid model for customer segment prediction analyzing 63M datapoints."
           ],
@@ -108,7 +108,7 @@
         {
           "title": "Software Engineer - Machine Learning | Dell Financial Services (DFS)",
           "location": "Hyderabad, India",
-          "dates": "Jan 2020 – Jul 2021",
+          "dates": "Jan 2020 - Jul 2021",
           "highlights": [
             "Designed production anomaly detection system for contract fraud reducing false positives by 40%.",
             "Built real-time explainability infrastructure using SHAP with CI/CD and monitoring pipelines."
@@ -146,8 +146,8 @@
   ],
   "projects": [
     {
-      "title": "NeuroCognitive Modular AI System — Human Cognition Emulation using LLMs + GANs",
-      "dates": "Dec 2024 – Present",
+      "title": "NeuroCognitive Modular AI System: Human Cognition Emulation using LLMs + GANs",
+      "dates": "Dec 2024 - Present",
       "highlights": [
         "Architected multi-agent system combining GANs + LLMs for creative reasoning and emotion modeling.",
         "Designed modules for reasoning (LLaMA/Gemini), creativity (Stable Diffusion), and persistent memory via FAISS.",
@@ -170,9 +170,9 @@
     {
       "institution": "Indiana University Bloomington",
       "degree": "Master of Science, Data Science",
-      "dates": "Aug 2021 – Dec 2022",
+      "dates": "Aug 2021 - Dec 2022",
       "notes": [
-        "Research Assistant — Computer Vision Lab"
+        "Research Assistant, Computer Vision Lab"
       ],
       "tags": [
         "Computer Vision",
@@ -183,9 +183,9 @@
     {
       "institution": "Sikkim Manipal University",
       "degree": "Bachelor of Technology, Computer Science",
-      "dates": "Aug 2016 – Apr 2020",
+      "dates": "Aug 2016 - Apr 2020",
       "notes": [
-        "Vice President — Computer Science Council"
+        "Vice President, Computer Science Council"
       ],
       "tags": [
         "Computer Science",
@@ -202,7 +202,7 @@
       ],
       "year": 2019,
       "venue": "International Conference on Communication and Electronics Systems",
-      "citations": 127,
+      "citations": 175,
       "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
     },
     {
@@ -214,11 +214,11 @@
       "year": 2021,
       "venue": "Water Security and Sustainability: Proceedings of Down To Earth 2019",
       "pages": "247-259",
-      "citations": 8,
+      "citations": 14,
       "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
     },
     {
-      "title": "Comparing performance of evolutionary algorithms — A travelling salesman perspective",
+      "title": "Comparing performance of evolutionary algorithms: A travelling salesman perspective",
       "authors": [
         "I.S. Donbosco",
         "U.K. Chakraborty"
@@ -241,7 +241,7 @@
       "link": "https://scholar.google.com/citations?user=B5MnxtIAAAAJ&hl=en"
     },
     {
-      "title": "Online Evaluation of Underground Mine Atmosphere and Scope of Application of WSN — A Case Study",
+      "title": "Online Evaluation of Underground Mine Atmosphere and Scope of Application of WSN: A Case Study",
       "authors": [
         "S. Jayanthu",
         "I.S. Donbosco",

@@ -1,10 +1,11 @@
 // src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
 import App from './App.jsx';
 import './index.css';
-
-document.documentElement.classList.add('dark');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

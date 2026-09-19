@@ -8,31 +8,42 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "rgb(var(--color-primary) / <alpha-value>)",
-        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
-        accent: "rgb(var(--color-accent) / <alpha-value>)",
-        "accent-dark": "rgb(var(--color-accent-dark) / <alpha-value>)",
-        text: "rgb(var(--color-text) / <alpha-value>)",
-        "text-muted": "rgb(var(--color-text-muted) / <alpha-value>)",
+        // Semantic tokens, values live in src/index.css (light + dark)
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        paper: "rgb(var(--paper) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        raised: "rgb(var(--raised) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        line: "rgb(var(--line) / <alpha-value>)",
+        signal: "rgb(var(--signal) / <alpha-value>)",
+        "on-signal": "rgb(var(--on-signal) / <alpha-value>)",
       },
       fontFamily: {
-        sans:    ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        heading: ['Syne', 'sans-serif'],
-        mono:    ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif'],
+        sans: ['"Geist Variable"', 'system-ui', 'sans-serif'],
+        mono: ['"Geist Mono Variable"', 'ui-monospace', 'monospace'],
       },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-out',
-        'slide-up': 'slideUp 0.5s ease-out',
+      borderRadius: {
+        // Shape system: interactive = full pill, panels + media = panel
+        panel: "1.25rem",
+      },
+      zIndex: {
+        nav: "50",
+        menu: "55",
+        grain: "60",
+        palette: "70",
+      },
+      transitionTimingFunction: {
+        out: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
+      },
+      animation: {
+        marquee: "marquee 40s linear infinite",
       },
     },
   },
