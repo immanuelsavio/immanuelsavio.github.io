@@ -22,7 +22,7 @@ npm run lint
 npm run build    # outputs dist/
 ```
 
-Node 20 or newer.
+Node 22 (pinned in package.json `engines`, which Vercel uses).
 
 ## Structure
 
