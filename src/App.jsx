@@ -1,15 +1,19 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, useLocation } from 'react-router-dom';
-import Syswin from './Components/Syswin/Syswin';
 
-// Portfolio is code-split so Syswin visitors don't download it (and vice versa for its pages).
+// Each site is its own chunk: Syswin visitors never download the portfolio, and vice versa.
 const Portfolio = lazy(() => import('./portfolio/Portfolio'));
+const Syswin = lazy(() => import('./syswin/Syswin'));
 
 function AppRoutes() {
   const location = useLocation();
 
   if (location.pathname.startsWith('/syswin')) {
-    return <Syswin />;
+    return (
+      <Suspense fallback={<div className="min-h-[100dvh]" />}>
+        <Syswin />
+      </Suspense>
+    );
   }
 
   return (

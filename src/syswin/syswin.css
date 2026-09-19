@@ -1,0 +1,95 @@
+/*
+  Syswin design tokens. Scoped to .sx so they never touch the portfolio.
+  Mineral white + deep clinical navy + one cobalt accent (from the Syswin logo).
+*/
+.sx {
+  --sx-paper:    244 246 248;
+  --sx-surface:  255 255 255;
+  --sx-ink:      10 22 48;
+  --sx-muted:    84 96 120;
+  --sx-line:     10 22 48;
+  --sx-brand:    31 63 209;
+  --sx-on-brand: 255 255 255;
+  --sx-deep:     8 17 38;
+  --sx-danger:   194 65 12;
+  color-scheme: light;
+  font-family: "Instrument Sans Variable", system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv05";
+  background: rgb(var(--sx-paper));
+  color: rgb(var(--sx-ink));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sx.sx-dark {
+  --sx-paper:    6 11 24;
+  --sx-surface:  13 21 41;
+  --sx-ink:      232 237 247;
+  --sx-muted:    147 160 184;
+  --sx-line:     232 237 247;
+  --sx-brand:    118 146 255;
+  --sx-on-brand: 6 11 24;
+  --sx-deep:     4 8 19;
+  --sx-danger:   251 146 60;
+  color-scheme: dark;
+}
+
+.sx ::selection { background: rgb(var(--sx-brand)); color: rgb(var(--sx-on-brand)); }
+
+.sx :focus-visible {
+  outline: 2px solid rgb(var(--sx-brand));
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.sx [id] { scroll-margin-top: 96px; }
+
+.sx a, .sx button, .sx input, .sx textarea, .sx select {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sx-display {
+  font-family: "Instrument Sans Variable", system-ui, sans-serif;
+  font-variation-settings: "wdth" 88;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.sx-mono { font-family: "Geist Mono Variable", ui-monospace, monospace; }
+
+.sx-shell {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) { .sx-shell { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .sx-shell { padding-inline: 2.5rem; } }
+
+/* Product label images sit on a calm mat so their mixed colours read as one family */
+.sx-mat {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(var(--sx-surface)) 0%, rgb(var(--sx-paper)) 100%);
+}
+.sx.sx-dark .sx-mat {
+  background: radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.96), rgb(226 232 242));
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+@keyframes sx-marquee { to { transform: translateX(-50%); } }
+.sx-marquee { animation: sx-marquee 60s linear infinite; }
+.sx-marquee:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sx *, .sx *::before, .sx *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

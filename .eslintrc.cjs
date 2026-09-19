@@ -11,6 +11,10 @@ module.exports = {
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.3' } },
   plugins: ['react-refresh'],
+  overrides: [
+    // react-three-fiber JSX uses three.js props (position, args, material...) the DOM rule doesn't know.
+    { files: ['src/**/three/**/*.jsx'], rules: { 'react/no-unknown-property': 'off' } },
+  ],
   rules: {
     'react/prop-types': 'off',
     'react/no-unknown-property': ['error', { ignore: ['fetchpriority'] }],
