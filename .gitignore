@@ -66,3 +66,5 @@ docs/
 .agents/
 agent/
 skills-lock.json
+# Local source images (post covers are exported to public/blog)
+/assets/

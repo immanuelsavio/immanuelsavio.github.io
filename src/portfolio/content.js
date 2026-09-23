@@ -6,6 +6,7 @@ import indianaLogo from '../assets/Indiana.png';
 import manipalLogo from '../assets/Manipal.png';
 import gitImage from '../assets/git.webp';
 import aiGuardiansImage from '../assets/ai_guardians.webp';
+import jevPost from '../data/posts/jev-decision-models.md?raw';
 
 export { resume };
 
@@ -86,9 +87,10 @@ export const talk = {
 };
 
 const blogImages = { 'git-zero-to-hero': gitImage, 'ai-guardians': aiGuardiansImage };
+const blogContent = { 'jev-decision-models': jevPost };
 
 export const posts = [...blog]
-  .map((p) => ({ ...p, cover: blogImages[p.id] || p.image }))
+  .map((p) => ({ ...p, cover: blogImages[p.id] || p.image, content: blogContent[p.id] ?? p.content }))
   .sort((a, b) => b.date.localeCompare(a.date));
 
 export const formatDate = (iso) =>

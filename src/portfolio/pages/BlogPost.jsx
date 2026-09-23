@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, Copy } from '@phosphor-icons/react';
 import { formatDate, posts } from '../content';
@@ -47,6 +48,17 @@ const md = {
     </li>
   ),
   strong: (p) => <strong className="font-semibold text-ink" {...p} />,
+  hr: () => <hr className="my-14 border-line/10" />,
+  img: ({ src, alt }) => (
+    <img src={src} alt={alt ?? ''} loading="lazy" className="my-10 w-full rounded-panel border border-line/10" />
+  ),
+  table: (p) => (
+    <div className="my-8 overflow-x-auto rounded-panel border border-line/10" data-lenis-prevent>
+      <table className="w-full border-collapse text-left text-base text-ink/80" {...p} />
+    </div>
+  ),
+  th: ({ style, ...p }) => <th className="whitespace-nowrap border-b border-line/15 bg-surface px-4 py-3 font-semibold text-ink" style={style} {...p} />,
+  td: ({ style, ...p }) => <td className="whitespace-nowrap border-b border-line/10 px-4 py-3 tabular-nums" style={style} {...p} />,
   blockquote: (p) => <blockquote className="my-8 border-l-2 border-signal pl-6 text-xl text-ink" {...p} />,
   pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
   code: ({ className, children }) =>
@@ -108,7 +120,7 @@ export default function BlogPost() {
         </motion.div>
       </header>
 
-      {post.cover && (
+      {post.cover && !post.inlineCover && (
         <div ref={hero} className="shell mt-14 md:mt-20">
           <div className="aspect-[16/9] overflow-hidden rounded-panel bg-surface md:aspect-[21/9]">
             <motion.img src={post.cover} alt="" width="1400" height="600" style={{ y: imgY, scale: 1.15 }} className="h-full w-full object-cover" />
@@ -119,7 +131,7 @@ export default function BlogPost() {
       <div className="shell mt-16 md:mt-24">
         <div className="mx-auto max-w-[68ch]">
           {/* The title is already the page h1, so drop the markdown's own leading h1 */}
-          <ReactMarkdown components={md}>{post.content.replace(/^# .*\n+/, '')}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={md}>{post.content.replace(/^# .*\n+/, '')}</ReactMarkdown>
         </div>
       </div>
     </article>
