@@ -1,7 +1,5 @@
 # Do You Need a Generative LLM for Every AI Decision?
 
-![Summary of the Jev benchmark results](/blog/jev-decision-models.webp)
-
 For the last couple of years my default way of adding AI to an app has been pretty simple. Give an LLM some context, ask it what to do, parse the answer, move on.
 
 That makes sense when the thing I need back is language. But a lot of the "AI" inside real systems isn't really about language at all:

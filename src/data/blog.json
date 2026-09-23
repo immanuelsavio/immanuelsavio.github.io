@@ -48,8 +48,7 @@
     "id": "jev-decision-models",
     "title": "Do You Need a Generative LLM for Every AI Decision?",
     "description": "I benchmarked Jev, a typed decision model, against GPT-5 nano, GPT-5.6 Luna and Llama 3.3 70B on routing, escalation and severity. Jev aced every standalone test at ~300 ms, then lost the composed one to nano.",
-    "image": "/blog/jev-decision-models.webp",
-    "inlineCover": true,
+    "image": "/blog/jev.avif",
     "date": "2026-09-23",
     "tags": [
       "AI",

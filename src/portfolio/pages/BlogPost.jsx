@@ -120,7 +120,7 @@ export default function BlogPost() {
         </motion.div>
       </header>
 
-      {post.cover && !post.inlineCover && (
+      {post.cover && (
         <div ref={hero} className="shell mt-14 md:mt-20">
           <div className="aspect-[16/9] overflow-hidden rounded-panel bg-surface md:aspect-[21/9]">
             <motion.img src={post.cover} alt="" width="1400" height="600" style={{ y: imgY, scale: 1.15 }} className="h-full w-full object-cover" />
